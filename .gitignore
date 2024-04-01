@@ -1,0 +1,26 @@
+__pycache__
+.ruff_cache/
+
+# Extension
+*.pkl
+*.jpg
+*.mp4
+*.pth
+*.pyc
+*.h5
+*.avi
+*.wav
+*.pyc
+*.mkv
+*.gif
+*.webm
+*.mp3
+*.tar
+*.gz
+*.json
+
+output*
+results*
+wandb*
+tmp*
+src/baselines/llm-pruner/llama-1-5.4b_lora_merged/pytorch_model.bin
