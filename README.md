@@ -3,10 +3,10 @@ Official codebase for [**Shortened LLaMA: A Simple Depth Pruning for Large Langu
 
 ## Installation
   ```bash
-  conda create -n st-llama python=3.9
-  conda activate st-llama
-  git clone https://github.com/Nota-NetsPresso/st-llama.git
-  cd st-llama
+  conda create -n shortened-llm python=3.9
+  conda activate shortened-llm
+  git clone https://github.com/Nota-NetsPresso/shortened-llm.git
+  cd shortened-llm
   pip install -r requirement.txt
   ```
 
@@ -29,7 +29,7 @@ The demo compares the use of [LLM-Pruner](https://arxiv.org/abs/2305.11627) (Ma 
   ```
 <details>
 <summary>
-Click for a screenshot (on an A100 80GB GPU)
+Click to see a demo screenshot (on an A100 80GB GPU):
 </summary>
 <img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
 </details>
@@ -38,7 +38,7 @@ Click for a screenshot (on an A100 80GB GPU)
 After identifying unimportant Transformer blocks, we perform one-shot pruning and light LoRA-based retraining.
     <details>
     <summary>
-    Click to see a method figure.
+    Click to see a method figure:
     </summary>
     <img alt="method" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_method.png" width="100%">
     </details>
