@@ -14,7 +14,7 @@ python src/anal_block_sensitivity_magnitude.py \
     --num_calib_data $NUM_CALIB_DATA \
     --output_dir $OUTPUT_SENSITIVITY
 
-# Perform 20% block pruning by removing 6 Transformer Blocks
+# Perform 20% block pruning by removing 8 Transformer Blocks
 python src/block_prune.py \
     --base_model $BASE_MODEL \
     --num_pruned_blocks $NUM_PRUNED_BLOCKS \

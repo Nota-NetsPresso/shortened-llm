@@ -111,7 +111,7 @@ The demo compares the use of [LLM-Pruner](https://arxiv.org/abs/2305.11627) (Ma 
   ```
 <details>
 <summary>
-Click for a screenshot (on an A100 80GB GPU)
+Click to see a demo screenshot (on an A100 80GB GPU)
 </summary>
 <img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
 </details>
