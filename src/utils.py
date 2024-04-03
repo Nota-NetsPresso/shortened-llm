@@ -67,6 +67,52 @@ def get_model(base_model=None, ckpt=None, lora_ckpt=None, tokenizer=None,
 
     return model, tokenizer, description
 
+def copy_weight(model, model_orig, list_pruned_blocks):
+    connect_info = {} # connect_info['TO-small'] = 'FROM-orig'
+    connect_info['model.embed_tokens.weight'] = 'model.embed_tokens.weight'
+    connect_info['model.norm.weight'] = 'model.norm.weight'
+    connect_info['lm_head.weight'] = 'lm_head.weight'
+
+    k=0
+    for k_orig in range(model_orig.config.__getattribute__("num_hidden_layers")):
+        if k_orig in list_pruned_blocks: # uncopied = pruned blocks            
+            continue
+        connect_info[f"model.layers.{k}."] = f"model.layers.{k_orig}."
+        print(f"original model.layers.{k_orig} --> pruned model.layers.{k}")
+        k = k+1        
+
+    print(f" ** excluded blocks {list_pruned_blocks}")
+
+    t0 = time.perf_counter()
+    for k in model.state_dict().keys():
+        flag = 0
+        k_orig = k
+        for prefix_key in connect_info.keys():
+            if k.startswith(prefix_key):
+                flag = 1
+                k_orig = k_orig.replace(prefix_key, connect_info[prefix_key])            
+                break
+        if flag == 1:
+            print(f"** forced COPY {k_orig} -> {k}")
+            model.state_dict()[k].copy_(model_orig.state_dict()[k_orig])
+    print(f"copy time --- {(time.perf_counter()-t0):.1f} sec")    
+
+    return model
+
+def get_block_pruned_network(model_orig, unimportance_order,
+                             num_pruned_blocks=1, device='cuda', fix_decapoda_config=True):   
+    # Define the block-pruned architecture with random initialization
+    config = copy.deepcopy(model_orig.config)
+    print(f'# blocks before pruning: {config.num_hidden_layers}')
+    config.__setattr__("num_hidden_layers", (config.num_hidden_layers-num_pruned_blocks))
+    print(f'# blocks after pruning: {config.num_hidden_layers}')    
+    model_pruned = AutoModelForCausalLM.from_config(config) 
+    
+    # Copy the original model's weights to the pruned model     
+    model_pruned = copy_weight(model_pruned, model_orig, unimportance_order[:num_pruned_blocks])
+    model_pruned = set_model_device_evalmode(model_pruned, device, fix_decapoda_config) 
+    return model_pruned
+
 def convert_json2csv_zeroshot(json_path, csv_path):
     with open(json_path, 'r') as file:
         data = json.load(file)
