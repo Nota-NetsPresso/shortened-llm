@@ -1,5 +1,5 @@
 torch
-transformers==4.33.1
+transformers==4.36.2
 datasets==2.14.5
 sentencepiece==0.1.99
 accelerate==0.22.0

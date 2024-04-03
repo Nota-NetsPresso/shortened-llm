@@ -19,7 +19,8 @@ __pycache__
 *.gz
 *.json
 
-output*
+output_prune*
+output_tune*
 results*
 wandb*
 tmp*
