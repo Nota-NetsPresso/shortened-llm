@@ -22,17 +22,24 @@ Note on package versions:
 
 </details>
 
-## Gradio Demo: Width✄ vs. Depth✄
-The demo compares the use of [LLM-Pruner](https://arxiv.org/abs/2305.11627) (Ma et al., 2023; width pruning) and [Shortened LLaMA](https://arxiv.org/abs/2402.02834) (Ours; depth pruning) for the LLaMA-1-7B model:
+## Examples
+The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero-shot evaluation.
+- Pruning criterion: PPL (top); Taylor+ (bottom).
+- 20% pruning of [LLaMA-1-7b](https://huggingface.co/baffo32/decapoda-research-llama-7B-hf)
   ```bash
-  python src/app.py
+  bash script/prune_llama-7b_crit-ppl.sh
+  bash script/prune_llama-7b_crit-taylor.sh
   ```
-<details>
-<summary>
-Click to see a demo screenshot (on an A100 80GB GPU):
-</summary>
-<img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
-</details>
+- 20% pruning of [Vicuna-7b-v1.3](https://huggingface.co/lmsys/vicuna-7b-v1.3)
+  ```bash
+  bash script/prune_vicuna-7b_crit-ppl.sh
+  bash script/prune_vicuna-7b_crit-taylor.sh
+  ```
+- 21% pruning of [Vicuna-13b-v1.3](https://huggingface.co/lmsys/vicuna-13b-v1.3) 
+  ```bash
+  bash script/prune_vicuna-13b_crit-ppl.sh
+  bash script/prune_vicuna-13b_crit-taylor.sh
+  ```
 
 ## Model Description
 After identifying unimportant Transformer blocks, we perform one-shot pruning and light LoRA-based retraining.
@@ -55,11 +62,30 @@ After identifying unimportant Transformer blocks, we perform one-shot pruning an
   | Vicuna-v1.3-13B | 21% | PPL | [nota-ai/st-vicuna-v1.3-10.5b-ppl](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-ppl) |
   | Vicuna-v1.3-13B | 21% | Taylor+ | [nota-ai/st-vicuna-v1.3-10.5b-taylor](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-taylor) |
 
+#### Zero-shot Evaluation
+- To measure (1) PPL on WikiText2 & PTB, and (2) accuracy on seven commonsense reasoning tasks, use: (EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c))
+    ```bash
+    bash script/evaluate.sh
+    ```
 
-## Evaluation Scripts
-- To measure zero-shot performance (EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c)), use:
+    <details>
+    <summary>
+    Click to see the zero-shot results:
+    </summary>
+  <img alt="results" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_zero-shot_scores.png" width="100%">
+    </details>
+
+## Other Scripts
+- To test other pruning ratios, use:
   ```bash
-  bash script/evaluate.sh
+  bash script/prune.sh
+  ```
+
+- To obtain baselines using the magnitude pruning criterion, use:
+  ```bash
+  bash script/prune_llama-7b_crit-magnitude.sh
+  bash script/prune_vicuna-7b_crit-magnitude.sh
+  bash script/prune_vicuna-13b_crit-magnitude.sh
   ```
 
 - To measure latency & throughput, use:
@@ -76,8 +102,19 @@ After identifying unimportant Transformer blocks, we perform one-shot pruning an
   ```bash
   bash script/measure_gpuutil.sh
   ```
-## Pruning-Retraining Scripts
-- TBD (expected release: May, 2024)
+
+## Gradio Demo: Width✄ vs. Depth✄
+The demo compares the use of [LLM-Pruner](https://arxiv.org/abs/2305.11627) (Ma et al., 2023; width pruning) and [Shortened LLaMA](https://arxiv.org/abs/2402.02834) (Ours; depth pruning) for the LLaMA-1-7B model:
+  ```bash
+  pip install transformers==4.33.1 # to run LLM-Pruner's model
+  python src/app.py
+  ```
+<details>
+<summary>
+Click for a screenshot (on an A100 80GB GPU)
+</summary>
+<img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
+</details>
 
 ## License
 - All rights related to this repository and the compressed models are reserved by Nota Inc.
