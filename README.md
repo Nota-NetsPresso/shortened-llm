@@ -1,5 +1,5 @@
 # Shortened LLM by Nota AI
-Official codebase for [**Shortened LLaMA: A Simple Depth Pruning for Large Language Models**](https://arxiv.org/abs/2402.02834) [[ArXiv](https://arxiv.org/abs/2402.02834)] [[ICLR 2024 Workshop on ME-FoMo](https://sites.google.com/view/me-fomo2024)].
+Official codebase for [**Shortened LLaMA: A Simple Depth Pruning for Large Language Models**](https://openreview.net/forum?id=18VGxuOdpu) [[ArXiv](https://arxiv.org/abs/2402.02834)] [[ICLR 2024 Workshop on ME-FoMo](https://sites.google.com/view/me-fomo2024)].
 
 ## Installation
   ```bash
@@ -111,7 +111,7 @@ The demo compares the use of [LLM-Pruner](https://arxiv.org/abs/2305.11627) (Ma 
   ```
 <details>
 <summary>
-Click to see a demo screenshot (on an A100 80GB GPU)
+Click to see a demo screenshot (on an A100 80GB GPU):
 </summary>
 <img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
 </details>
