@@ -21,7 +21,6 @@ __pycache__
 
 output_prune*
 output_tune*
-results*
 wandb*
 tmp*
 src/baselines/llm-pruner/llama-1-5.4b_lora_merged/pytorch_model.bin

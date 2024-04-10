@@ -1,0 +1,3 @@
+boolq,piqa,hellaswag,winogrande,arc_easy,arc_challenge,openbookqa,AVE
+acc,acc,acc_norm,acc,acc,acc_norm,acc_norm,n/a
+74.98470948012232,77.09466811751903,73.68054172475603,68.90292028413575,71.54882154882155,43.77133105802048,44.2,64.88328460191073

@@ -1,0 +1,41 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 140 + input 12
+<s>The Leaning Tower of Pisa is known for its tilt, but you may be surprised to learn that it's not the only leaning structure on this list. This list is about other structures in the world that lean or lean significantly. These structures, whether intentional or accidental, possess incredible engineering feats to remain vertical or nearly so.
+toirez_200529743_north-attic
+The North Attic in Paris, France, is an incredible architectural and engineering feat. Its apartment block, known as the Haute-Sainte-Croix, is over 100
+=== output 1 | leng gen 140 + input 12
+<s>The Leaning Tower of Pisa is known for its slight inclination, which makes it one of the most famous landmarks in the world. Its history can be traced back to the 12th century, and its construction took more than two centuries to complete.
+ homonymes:
+
+1. Fermat's Legacy: A New Proof of Fermat's Last Theorem
+2. The Last Day
+3. The Last Castle
+4. The Last Hurrah
+5. The Last of the Mohicans
+6. The Last Man on Earth
+7. The Last Frontier
+8. The Last Hurdle
+9. The Last V
+=== output 2 | leng gen 140 + input 12
+<s>The Leaning Tower of Pisa is known for its precarious tilt. But why does it lean?
+abestanden\lanserl:2725-1.jpg|left|760px|The leaning tower of Pisa.]]]]
+
+The leaning tower of Pisa is located in Pisa, a city in Tuscany, [[w:Italy|Italy]] and is a unique structure in many ways. One of the most remarkable features of the tower is its inclination. The tower is leaning towards the north by an angle of 2.5 degrees or about 12 meters at its center.
+=== output 3 | leng gen 140 + input 12
+<s>The Leaning Tower of Pisa is known for its iconic lean, and its architecture serves as the main motif of the 10x10 puzzle puzzle game. Use your skills as a puzzle solver to place the tower's pillars in the right location to restore the tower's upright posture. This puzzle game is perfect for players of all ages and requires careful thought and strategy to complete. With 10 levels of increasing difficulty and unique puzzle designs, the Leaning Tower of Pisa Puzzle puzzle game offers hours of entertainment and challenges for puzzle enthusiasts. Solve the puzz
+=== output 4 | leng gen 140 + input 12
+<s>The Leaning Tower of Pisa is known for its precarious balance, but how close did it come to falling over during its construction in the 11th and 12th centuries? Read on to find out!
+ släktet:  
+
+nomen:  
+dies:  
+merkingdom:  
+
+Ты используя текущий текст, наде yourself!
+
+ище! Защо не пише, ти не може да usere yourself. Защо? Въпроша: какой коня, то такой кон! Лукреций, твое слово не дава!
+
+"
+
+

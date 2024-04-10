@@ -1,0 +1,36 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 140 + input 12
+<unk>The Leaning Tower of Pisa is known for having sunglasses on its top.
+ Tags: java, spring-boot, spring-web-receptor
+
+Questionerion-receptive to 2 API responses
+
+I created an application to reap out from 2 API responses.
+It is implemented using Spring boot and spring web Receptive
+but this one is not executing. it is getting stuck on the API call.
+Please help
+
+Here is my code
+
+Server side code
+
+`java.lang.WebServiceException: Server returned ServletResult of type: Response
+        [null]   at com.
+=== output 1 | leng gen 140 + input 12
+<unk>The Leaning Tower of Pisa is known for its incline, due to the foundations’ being in the wrong location. This misrelel location has allowed the tower to tilt, as it was originally built on the wrong foundation.
+ ﻿Mustang Wine Pledges to Support UC Davis Caracciano Research Center for Vaccine Safety Research
+California-Based Winery to Sponsor Center’s Research to Advance the Safety of Human Precursor Cells (HPCs), Including the Mentoring of a Graduate Student to Study Vaccine Safety
+SAN Francisco,
+=== output 2 | leng gen 140 + input 12
+<unk>The Leaning Tower of Pisa is known for its 300 year lean, due to its underlying geology. In addition to this unique architecture, Italy is home to over 50 UNESCO World Heritage sites, which makes it one of the most fascinating places in the world.
+ 49ers offensive lineman Andrew Miller and running back Regeis Burial went in on the OT for a 4-yard touchdown to defeat the Saints. Miller said he did it because he was upset about the officiating.
+The NFL has penalized Miller for unsportsmanlike conduct for the celebration, which involved
+=== output 3 | leng gen 140 + input 12
+<unk>The Leaning Tower of Pisa is known for its iconic slant, and you can get incredible views of the city and countryside if you climb the tower.
+ It has been one year since our last news update!
+For those who don't know, in December 2016 GamerNia had a website update and a brand new logo! The logo is designed by our community leader, Chasity, and it represents the spirit of GamerNia to stand out from the rest and never give up. Our old logo was very nice, but the new one fits better with our brand identity and our unique community.
+
+=== output 4 | leng gen 140 + input 12
+<unk>The Leaning Tower of Pisa is known for its gorgeous bell tower that stands in an odd angle, but how many people know the story of the construction and the history behind the iconic building? It's time to dispel the myths and get to the bottom of the tower's story.
+ SHOREWalk is a day-long celebration of art, culture and community! From 12pm-4pm, artists, crafters, performers and vendors from New Jersey, New York and other states will gather in Asbury Park for a day of free street festival-style entertainment. Asbury Park’s As
