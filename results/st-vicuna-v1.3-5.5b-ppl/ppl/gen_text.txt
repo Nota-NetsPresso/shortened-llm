@@ -1,16 +1,16 @@
 === input ===
 The Leaning Tower of Pisa is known for
-=== output 0 | leng gen 140 + input 12
+=== output 0 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its tilt, but you may be unaware of the reason why it stands so askew. The tower was designed to lean to the west, while the ground beneath it tilted to the north, causing the tower to tilt slowly over time. However, thanks to a new study, scientists have discovered why this happened and the role of groundwater in the tower's tilt.
 The tower is a symbol of the Italian city of Pisa and was built on marshy ground, which had to be drained to build the tower. This draining caused the ground beneath the tower to tilt,
-=== output 1 | leng gen 140 + input 12
+=== output 1 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its tilt that has been increasing over time, due to the expansion of the clay soil that the tower rests on.
 When people talk about the Leaning Tower of Pisa, it is usually about its height or the tilt of its tower. But, do you know what causes its tilt, and how it is affected by the environment?
 The Leaning Tower of Pisa is a bell tower that is 77.5 tonnes and 55 meters high. However, it has been gradually tilted to the side by about 13 degrees over time. This is due to
-=== output 2 | leng gen 140 + input 12
+=== output 2 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its famous tilt and slant, due to its underlying geology. The tower's unique architecture, intricate construction, and historic significance have made it one of the most popular tourist attractions in Italy, attracting visitors from all over the world. Despite its fame, the tower has been the subject of constant debate and attempts to correct the tilting. Despite the tower's famous slant, visitors can still admire the intricate details of the architecture, and its history has inspired countless works of art and literature.
 The tower's history dates back over 6000 years ago, to the
-=== output 3 | leng gen 140 + input 12
+=== output 3 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its iconic tilt, and its architecture is the reason it's leaning. What if you could add a similar structure to a cardboard box? It's all about balance, as you build your box tower with three stacked rectangular cardboard boxes.
 
 Materials:
@@ -21,7 +21,7 @@ Materials:
 Instructions:
 
 1. Open the cardboard sheets and stack them on top of each other in a straight line. Place one of the sheets on the table as the base, then draw a diagonal line
-=== output 4 | leng gen 140 + input 12
+=== output 4 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its infamous tilt, and it's fascinating how this happens.
 The tower's tilt is caused by water accumulating in the foundation, as it moves towards the center of gravity.
 But it wasn't always this way.

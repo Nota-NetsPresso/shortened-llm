@@ -1,21 +1,21 @@
 === input ===
 The Leaning Tower of Pisa is known for
-=== output 0 | leng gen 140 + input 12
+=== output 0 | leng gen 128 + input 12
 <unk>The Leaning Tower of Pisa is known for having an odd lean to the left, but it isn’t the tower that has the problem, it’s the underlying soil that is the problem. The tower is constructed over a weak, wet and sticky clay soil that is prone to expansion and shrinkage. The tower started to tilt as a result of the uneven expansion of the underlying clay soil.
 Adaptation is the act of changing, but it’s not a matter of ‘doing something different’, it’s a matter of adapting to the reality of the change happening. Adaptation is about finding the best
-=== output 1 | leng gen 140 + input 12
+=== output 1 | leng gen 128 + input 12
 <unk>The Leaning Tower of Pisa is known for its amazing bend, and you could spend an entire day exploring this landmark.
 A trip to the countryside of Pisa offers the opportunity to see the famous Piazza Galileo, where Leonardo da Vinci was born. You can see the Galileo Lounge or, if you’re feeling adventurous, visit the Medici family castle.
 Day 4: Final Pisa to Rome - 36.05 miles (60.12 km)
 After your morning sightseeing, head to the town of Pisa and visit the Piazza del
-=== output 2 | leng gen 140 + input 12
+=== output 2 | leng gen 128 + input 12
 <unk>The Leaning Tower of Pisa is known for its famous bump and slant, due to its underlying complex of tertians of different rock geology; the tower has a significant lean of 7.3° from the perpendicular. Pisa is also known as the City of Lights, because its numerous fountains, including the Fountain of the Lily or "Fontana della Vergina", the Laughing Horses, and the Piazza Navio.
 The city is also known as the birthplace of Anzio and Guevara, the name of the city is mentioned in the 9th century as
-=== output 3 | leng gen 140 + input 12
+=== output 3 | leng gen 128 + input 12
 <unk>The Leaning Tower of Pisa is known for being so unbalanced, it's impossible to stand it up correctly. (If you can't find your child in there, he's probably somewhere like Rome, Spain or Paris. Or if he's lost, go to the first town you pass and ask someone. Chances are good you'll get a crowd of people who'll know him. Just make sure you bring plenty of souvenirs to pay for your rescue.)
 But to make the trip to Rome worth your while, you'll also have to make sure your child understands something very important about this journey:
 You are in charge
-=== output 4 | leng gen 140 + input 12
+=== output 4 | leng gen 128 + input 12
 <unk>The Leaning Tower of Pisa is known for its infamous tilt, and it is the third most visited site in Italy after Rome and Venice.
 We also stop by Milan to visit the Chiesa Shrine of St. John the Evangelist. We'll also enjoy the wonderful views of the Piazza Sempione, one of the largest squares in the city.
 Flights: From your home country, you’ll arrive in Rome, Italy (LHR, RCC) on Day 1, and you'll return from Rome, Italy on Day 7 or 8 (see itinerary details)

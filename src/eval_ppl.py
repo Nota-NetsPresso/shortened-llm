@@ -53,11 +53,11 @@ def generate_txt(output_dir, model, tokenizer,
         output_len = len(s)
         output = tokenizer.decode(s)
               
-        print(f"=== output {i} | leng gen {output_len} + input {input_len}\n")
+        print(f"=== output {i} | leng gen {output_len-input_len} + input {input_len}\n")
         print(output)        
 
         with open(txt_path, 'a', encoding='utf8') as f:
-            f.write(f"=== output {i} | leng gen {output_len} + input {input_len}\n")
+            f.write(f"=== output {i} | leng gen {output_len-input_len} + input {input_len}\n")
             f.write(f"{output}\n")
             
 if __name__ == "__main__":

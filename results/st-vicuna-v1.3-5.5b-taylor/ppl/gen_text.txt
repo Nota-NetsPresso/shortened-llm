@@ -1,17 +1,17 @@
 === input ===
 The Leaning Tower of Pisa is known for
-=== output 0 | leng gen 140 + input 12
+=== output 0 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for having an odd, tilted base. This occurs naturally in the soil and has caused the tower to move slightly since it was first built in 1423. The tilt is a mere 36.5 degrees, just enough to give visitors the illusion that they are standing askew.
 9. The Tower of Babel: The Tower of Babel, also known as Ziggelzag Tower, is located in Doha, Kuwait. It was built in the 1950s and houses the headquarters of the First Gulf Bank.
 10. The Great
-=== output 1 | leng gen 140 + input 12
+=== output 1 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its sinking into the ground and the process by which this process occurs. The tower is 2004.008 cubic meters in volume, with a base area of 680 square meters. The original height of the tower is known to be 54 meters. The tower has a slight degree of sloping which gives it a slope of approximately 2416 millimeters per meter of height. The exact value of the slope varies depending on which of the three measurements are used. The base, the height, or the volume. The slope of the tower is not due to the
-=== output 2 | leng gen 140 + input 12
+=== output 2 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its characteristic slant, which has been attributed to its construction techniques and soil composition, as well as the geological conditions of the site.
 When construction on the tower began in 1031 AD, it was intended to be an impressive monument to the spirit of determination and resilience, as well as an architectural achievement. According to accounts of the day, however, workers found the foundations to be too sphinx to the ground, and this led to the tower being constructed to its present-day slant, as a result of the heavy stone on top leaning against the foundations.
-=== output 3 | leng gen 140 + input 12
+=== output 3 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for being a shard of sophisticate engineering in 1494 and we wanted to incorporate its slanted structure in a fashionable way. Our team came up with a design feature that would feature a 37-foot-long, curved shelf that looks out over the city and offers an unobstructed view of the Pisa skyline. Inspired by the curves of the tower's towering structure, the shelf is the centerpiece of our outdoor living feature and we wanted to showcase it.
 We wanted to be able to show you what is possible in the
-=== output 4 | leng gen 140 + input 12
+=== output 4 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its unique architectural style and tilt. In the early 12th century, the tower was designed as a monument to honor the city of Pisa, and construction began around 1120. It was originally intended to be a monumental bell tower for the Church of San Marta, but construction was halted due to structural problems and funding difficulties. Despite the original intentions, the tower was never intended as a bell tower.
 It wasn't until 1164 that construction resumed with an increase in funding, and the tower was built using a unique construction method where workers clim
