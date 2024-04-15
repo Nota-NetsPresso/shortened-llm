@@ -1,23 +1,23 @@
 === input ===
 The Leaning Tower of Pisa is known for
-=== output 0 | leng gen 140 + input 12
+=== output 0 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its tilt, but you may be wondering how and why it leans so much. To understand this, you need to know a little about its history and construction.
  
 The Tower of Pisa, one of the most famous landmarks in Italy, was first designed in 1119 by a Pisan architect and construction began in 1167. However, it didn’t take long for problems to arise. Due to the soft soil around the foundation of the tower, its structure started to tilt and collapse inward. The tower’s main construction materials were poor, and due to the workers
-=== output 1 | leng gen 140 + input 12
+=== output 1 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its slight tilt due to the foundations sinking, the tower slowly began to tilt from the right when underground waste disposal was put in by the town. The tower was completed in 1256 and was soon found to be leaning.
 
 In 1307, the city council decided that it was unsafe and ordered that construction should cease. The tower did not have a strong foundation and, over time, it moved further into the ground. It has been speculated that the tower may have tilted more severely if it had continued to be built and that the lean was not
-=== output 2 | leng gen 140 + input 12
+=== output 2 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its leaning side. The Tower was built by the Pisan government in the 11th century, and although construction began on May 3, 1177, it is believed that the tower’s foundation began sinking almost immediately. The building continued to lean until the 20th century, when construction workers began to try and fix the leaning problem. To this day, the tower is still unstable but remains one of the most popular attractions in Italy.
 
 The Leaning Tower of Pisa has become an icon of Italian architecture, and its lean has become a symbol of the nation
-=== output 3 | leng gen 140 + input 12
+=== output 3 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its iconic tilt, but there are many other incredible structures around the world that, like Pisa, boast their own unique architectural flaws. Here are ten of the most unique and fascinating historical buildings that have either been built to look like they're tilted or had a misalignment before they were fixed.
 
 1. The Leaning Tower of Pisa, Italy
 The tower is leaning due to a combination of the foundations sinking into soft ground during construction and the weight of the roof's construction. After several attempts to repair the lean, including trying to pull
-=== output 4 | leng gen 140 + input 12
+=== output 4 | leng gen 128 + input 12
 <s>The Leaning Tower of Pisa is known for its precarious balance, but how close is it to actually falling down? This is one of those questions that people have asked for centuries—the tower has been leaning for 1000 years. It’s been an icon for over 300 years, since it first began to tilt in 1306. Experts estimate that it could take several years for the tower to completely collapse, assuming no interventions are made to correct the tilt.
 
 It’s important to note that while the tower is a historical and cultural symbol, it’s now largely considered safe to clim
