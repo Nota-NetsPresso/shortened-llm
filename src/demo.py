@@ -17,6 +17,7 @@ def set_seed(random_seed):
     np.random.seed(random_seed)
     random.seed(random_seed)
 
+
 def prepare_model(model, device):
     if "cuda" in device:
         model = model.half().to(device)
@@ -26,16 +27,21 @@ def prepare_model(model, device):
     model.config.eos_token_id = 2
     return model.eval()
 
+
 def clean_memory():
     gc.collect()
     torch.cuda.empty_cache()
 
+
 class LlamaCompressionDemo:
     def __init__(
         self,
-        orig_checkpoint_id, device_orig,
-        compressed_llmpruner_id, device_llmprn,
-        compressed_ours_id, device_ours
+        orig_checkpoint_id,
+        device_orig,
+        compressed_llmpruner_id,
+        device_llmprn,
+        compressed_ours_id,
+        device_ours,
     ) -> None:
         self.device_orig = device_orig
         self.device_llmprn = device_llmprn
@@ -45,7 +51,9 @@ class LlamaCompressionDemo:
         )
         print("\n** load models")
         start_time = time.time()
-        self.model_orig = AutoModelForCausalLM.from_pretrained(orig_checkpoint_id, low_cpu_mem_usage=True)
+        self.model_orig = AutoModelForCausalLM.from_pretrained(
+            orig_checkpoint_id, low_cpu_mem_usage=True
+        )
         print(f"finish: orig model {(time.time() - start_time):.1f} sec")
 
         start_time = time.time()
@@ -54,7 +62,9 @@ class LlamaCompressionDemo:
         print(f"finish: llm-pruner {(time.time() - start_time):.1f} sec")
 
         start_time = time.time()
-        self.model_ours = AutoModelForCausalLM.from_pretrained(compressed_ours_id, low_cpu_mem_usage=True)
+        self.model_ours = AutoModelForCausalLM.from_pretrained(
+            compressed_ours_id, low_cpu_mem_usage=True
+        )
         print(f"finish: ours {(time.time() - start_time):.1f} sec")
 
         self.model_orig = prepare_model(self.model_orig, self.device_orig)
@@ -115,12 +125,14 @@ class LlamaCompressionDemo:
                     results_text += f"\n{s}\n\n\n"
 
         results_efficiency = f"{(test_time):.1f} sec; {(test_throughput):.1f} tokens/sec (bs {batch_size})"
-        results_text_kr = self.translator.translate(results_text[:3000], dest='ko').text
+        results_text_kr = self.translator.translate(results_text[:3000], dest="ko").text
 
         print("\n** generation done")
         print(f"{results_efficiency}")
         print(f"Input {input_len} + Output {max_new_tokens} tokens")
-        print(f"Batch Sz {batch_size} | top_k {top_k} top_p {top_p} temperature {temperature} \n")
+        print(
+            f"Batch Sz {batch_size} | top_k {top_k} top_p {top_p} temperature {temperature} \n"
+        )
         clean_memory()
 
         return results_text, results_efficiency, results_text_kr
@@ -176,7 +188,6 @@ class LlamaCompressionDemo:
             temperature,
         )
         return output_text, time_throughput_txt, results_text_kr
-
 
     def get_example_list(self):
         return [

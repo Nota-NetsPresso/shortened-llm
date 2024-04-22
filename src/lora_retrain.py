@@ -1,7 +1,8 @@
-'''
+"""
 Refer to
 https://github.com/tloen/alpaca-lora/blob/main/finetune.py
-'''
+"""
+
 import argparse
 import os
 
@@ -22,9 +23,15 @@ def main(args):
     os.environ["WANDB_PROJECT"] = args.wandb_project
     set_seed(args.seed)
 
-    model, tokenizer, description = get_model(base_model=args.base_model, ckpt=args.ckpt, lora_ckpt=None,
-                                        tokenizer=args.tokenizer, model_type=args.model_type, device=args.device,
-                                        fix_decapoda_config=args.fix_decapoda_config)
+    model, tokenizer, description = get_model(
+        base_model=args.base_model,
+        ckpt=args.ckpt,
+        lora_ckpt=None,
+        tokenizer=args.tokenizer,
+        model_type=args.model_type,
+        device=args.device,
+        fix_decapoda_config=args.fix_decapoda_config,
+    )
 
     gradient_accumulation_steps = args.batch_size // args.micro_batch_size
     if not args.no_instruction:
@@ -83,17 +90,16 @@ def main(args):
         return tokenized_full_prompt
 
     def split_and_tokenizer(test_data, tokenizer, seq_len, field_name):
-        test_ids = tokenizer("\n\n".join(test_data[field_name]), return_tensors='pt').input_ids[0]
+        test_ids = tokenizer(
+            "\n\n".join(test_data[field_name]), return_tensors="pt"
+        ).input_ids[0]
         test_ids_batch = []
         nsamples = test_ids.numel() // seq_len
 
         test_set = []
         for i in range(nsamples):
-            batch = test_ids[(i * seq_len):((i + 1) * seq_len)]
-            test_set.append({
-                'input_ids': batch,
-                'labels': batch
-            })
+            batch = test_ids[(i * seq_len) : ((i + 1) * seq_len)]
+            test_set.append({"input_ids": batch, "labels": batch})
         return test_set
 
     # Prepare For LoRA
@@ -114,9 +120,7 @@ def main(args):
     train_val = data["train"].train_test_split(
         test_size=args.val_set_size, shuffle=True, seed=42
     )
-    train_data = (
-        train_val["train"].shuffle().map(generate_and_tokenize_prompt)
-    )
+    train_data = train_val["train"].shuffle().map(generate_and_tokenize_prompt)
     val_data = {
         args.data_path: train_val["test"].shuffle().map(generate_and_tokenize_prompt),
     }
@@ -126,13 +130,17 @@ def main(args):
         from LLMPruner.datasets.ppl_dataset import get_ptb, get_wikitext2
 
         seq_len = 128
-        for extra_dataset in args.extra_val_dataset.split(','):
-            if 'wikitext2' in extra_dataset:
+        for extra_dataset in args.extra_val_dataset.split(","):
+            if "wikitext2" in extra_dataset:
                 _, test_data = get_wikitext2(seq_len, None)
-                test_data = split_and_tokenizer(test_data, tokenizer, seq_len, field_name='text')
-            if 'ptb' in extra_dataset:
+                test_data = split_and_tokenizer(
+                    test_data, tokenizer, seq_len, field_name="text"
+                )
+            if "ptb" in extra_dataset:
                 _, test_data = get_ptb(seq_len, None)
-                test_data = split_and_tokenizer(test_data, tokenizer, seq_len, field_name='sentence')
+                test_data = split_and_tokenizer(
+                    test_data, tokenizer, seq_len, field_name="sentence"
+                )
             val_data[extra_dataset] = test_data
 
     trainer = transformers.Trainer(
@@ -159,7 +167,7 @@ def main(args):
             ddp_find_unused_parameters=None,
             group_by_length=args.group_by_length,
             report_to="wandb",
-            run_name=args.output_dir.split('/')[-1],
+            run_name=args.output_dir.split("/")[-1],
             metric_for_best_model="{}_loss".format(args.data_path),
         ),
         data_collator=transformers.DataCollatorForSeq2Seq(
@@ -169,9 +177,7 @@ def main(args):
     model.config.use_cache = False
     old_state_dict = model.state_dict
     model.state_dict = (
-        lambda self, *_, **__: get_peft_model_state_dict(
-            self, old_state_dict()
-        )
+        lambda self, *_, **__: get_peft_model_state_dict(self, old_state_dict())
     ).__get__(model, type(model))
 
     trainer.train(resume_from_checkpoint=args.resume_from_checkpoint)
@@ -184,11 +190,20 @@ def main(args):
         model = None
 
         set_seed(args.seed)
-        model, tokenizer, description = get_model(base_model=args.base_model, ckpt=args.ckpt, lora_ckpt=None,
-                                    tokenizer=args.tokenizer, model_type=args.model_type, device=args.device)
+        model, tokenizer, description = get_model(
+            base_model=args.base_model,
+            ckpt=args.ckpt,
+            lora_ckpt=None,
+            tokenizer=args.tokenizer,
+            model_type=args.model_type,
+            device=args.device,
+        )
 
         from LLMPruner.peft import PeftModel
-        lora_model = PeftModel.from_pretrained(model, args.output_dir, torch_dtype=torch.float16)
+
+        lora_model = PeftModel.from_pretrained(
+            model, args.output_dir, torch_dtype=torch.float16
+        )
 
         print("lora merged ")
         lora_model = lora_model.merge_and_unload()
@@ -200,51 +215,115 @@ def main(args):
             if "lora" not in k
         }
         model.save_pretrained(
-            os.path.join(args.output_dir+'_lora_merge_fp16'), state_dict=deloreanized_sd, max_shard_size="10GB"
+            os.path.join(args.output_dir + "_lora_merge_fp16"),
+            state_dict=deloreanized_sd,
+            max_shard_size="10GB",
         )
-        tokenizer.save_pretrained(os.path.join(args.output_dir+'_lora_merge_fp16'))
+        tokenizer.save_pretrained(os.path.join(args.output_dir + "_lora_merge_fp16"))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     # Model Type&Path
-    parser.add_argument('--base_model', type=str, default="output_tune/llama-1-7b/ppl_n10/rm_6_blocks_lora_merge_fp16", help='base model name')
-    parser.add_argument('--tokenizer',type=str, default=None, help='if None, base model name is used')
-    parser.add_argument('--model_type', type=str, default="pretrain", choices=['pretrain', 'pruneLLM', 'tune_pruneLLM'])
-    parser.add_argument('--ckpt', type=str, default=None)
-    parser.add_argument('--device', type=str, default="cuda", help='device')
-    parser.add_argument('--save_lora_merge', action='store_true')
-    parser.add_argument('--fix_decapoda_config', default=False, action="store_true", help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf")
+    parser.add_argument(
+        "--base_model",
+        type=str,
+        default="output_tune/llama-1-7b/ppl_n10/rm_6_blocks_lora_merge_fp16",
+        help="base model name",
+    )
+    parser.add_argument(
+        "--tokenizer", type=str, default=None, help="if None, base model name is used"
+    )
+    parser.add_argument(
+        "--model_type",
+        type=str,
+        default="pretrain",
+        choices=["pretrain", "pruneLLM", "tune_pruneLLM"],
+    )
+    parser.add_argument("--ckpt", type=str, default=None)
+    parser.add_argument("--device", type=str, default="cuda", help="device")
+    parser.add_argument("--save_lora_merge", action="store_true")
+    parser.add_argument(
+        "--fix_decapoda_config",
+        default=False,
+        action="store_true",
+        help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf",
+    )
 
-    parser.add_argument('--data_path', type=str, default="yahma/alpaca-cleaned", help='data path')
-    parser.add_argument('--extra_val_dataset', type=str, default=None, help='validation datasets. Split with ","')
-    parser.add_argument('--output_dir', type=str, default="./lora-alpaca", help='output directory')
-    parser.add_argument('--seed', type=int, default=1234)
+    parser.add_argument(
+        "--data_path", type=str, default="yahma/alpaca-cleaned", help="data path"
+    )
+    parser.add_argument(
+        "--extra_val_dataset",
+        type=str,
+        default=None,
+        help='validation datasets. Split with ","',
+    )
+    parser.add_argument(
+        "--output_dir", type=str, default="./lora-alpaca", help="output directory"
+    )
+    parser.add_argument("--seed", type=int, default=1234)
 
     # Training Hyperparameters
-    parser.add_argument('--batch_size', type=int, default=128, help='batch size')
-    parser.add_argument('--micro_batch_size', type=int, default=4, help='micro batch size')
-    parser.add_argument('--num_epochs', type=int, default=5, help='number of epochs')
-    parser.add_argument('--learning_rate', type=float, default=3e-4, help='learning rate')
-    parser.add_argument('--cutoff_len', type=int, default=256, help='cutoff length')
-    parser.add_argument('--val_set_size', type=int, default=2000, help='validation set size')
-    parser.add_argument('--prompt_template_name', type=str, default="alpaca", help="The prompt template to use, will default to alpaca.")
-    parser.add_argument('--no_instruction', action='store_true', default=False, help="Whether to use the instruction template or not.")
+    parser.add_argument("--batch_size", type=int, default=128, help="batch size")
+    parser.add_argument(
+        "--micro_batch_size", type=int, default=4, help="micro batch size"
+    )
+    parser.add_argument("--num_epochs", type=int, default=5, help="number of epochs")
+    parser.add_argument(
+        "--learning_rate", type=float, default=3e-4, help="learning rate"
+    )
+    parser.add_argument("--cutoff_len", type=int, default=256, help="cutoff length")
+    parser.add_argument(
+        "--val_set_size", type=int, default=2000, help="validation set size"
+    )
+    parser.add_argument(
+        "--prompt_template_name",
+        type=str,
+        default="alpaca",
+        help="The prompt template to use, will default to alpaca.",
+    )
+    parser.add_argument(
+        "--no_instruction",
+        action="store_true",
+        default=False,
+        help="Whether to use the instruction template or not.",
+    )
 
     # Lora Configuration
-    parser.add_argument('--lora_r', type=int, default=8, help='lora r')
-    parser.add_argument('--lora_alpha', type=int, default=16, help='lora alpha')
-    parser.add_argument('--lora_dropout', type=float, default=0.05, help='lora dropout')
-    parser.add_argument('--lora_target_modules', type=str, default="q_proj,k_proj,v_proj,o_proj,gate_proj,down_proj,up_proj", help='lora target modules')
+    parser.add_argument("--lora_r", type=int, default=8, help="lora r")
+    parser.add_argument("--lora_alpha", type=int, default=16, help="lora alpha")
+    parser.add_argument("--lora_dropout", type=float, default=0.05, help="lora dropout")
+    parser.add_argument(
+        "--lora_target_modules",
+        type=str,
+        default="q_proj,k_proj,v_proj,o_proj,gate_proj,down_proj,up_proj",
+        help="lora target modules",
+    )
 
     # llm hyperparameters
-    parser.add_argument('--train_on_inputs', default=False, action="store_true", help='Train on inputs. If False, masks out inputs in loss')
-    parser.add_argument('--add_eos_token', default=False, action="store_true")
-    parser.add_argument('--group_by_length', default=False, action="store_true", help="faster, but produces an odd training loss curve")
+    parser.add_argument(
+        "--train_on_inputs",
+        default=False,
+        action="store_true",
+        help="Train on inputs. If False, masks out inputs in loss",
+    )
+    parser.add_argument("--add_eos_token", default=False, action="store_true")
+    parser.add_argument(
+        "--group_by_length",
+        default=False,
+        action="store_true",
+        help="faster, but produces an odd training loss curve",
+    )
 
     # wandb params
-    parser.add_argument('--wandb_project', type=str, default="")
-    parser.add_argument('--resume_from_checkpoint', type=str, help="either training checkpoint or final adapter")
+    parser.add_argument("--wandb_project", type=str, default="")
+    parser.add_argument(
+        "--resume_from_checkpoint",
+        type=str,
+        help="either training checkpoint or final adapter",
+    )
 
     args = parser.parse_args()
 
