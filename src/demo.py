@@ -1,12 +1,13 @@
+import gc
 import random
 import time
-import gc
-import torch
-import numpy as np
+
 import googletrans
-from transformers import AutoModelForCausalLM
-from transformers import LlamaTokenizer
-    
+import numpy as np
+import torch
+from transformers import AutoModelForCausalLM, LlamaTokenizer
+
+
 def set_seed(random_seed):
     torch.manual_seed(random_seed)
     torch.cuda.manual_seed(random_seed)
@@ -34,7 +35,7 @@ class LlamaCompressionDemo:
         self,
         orig_checkpoint_id, device_orig,
         compressed_llmpruner_id, device_llmprn,
-        compressed_ours_id, device_ours        
+        compressed_ours_id, device_ours
     ) -> None:
         self.device_orig = device_orig
         self.device_llmprn = device_llmprn
@@ -46,13 +47,13 @@ class LlamaCompressionDemo:
         start_time = time.time()
         self.model_orig = AutoModelForCausalLM.from_pretrained(orig_checkpoint_id, low_cpu_mem_usage=True)
         print(f"finish: orig model {(time.time() - start_time):.1f} sec")
-        
+
         start_time = time.time()
         self.model_llmpruner = torch.load(compressed_llmpruner_id, map_location="cpu")
         self.model_llmpruner = self.model_llmpruner["model"]
         print(f"finish: llm-pruner {(time.time() - start_time):.1f} sec")
 
-        start_time = time.time()  
+        start_time = time.time()
         self.model_ours = AutoModelForCausalLM.from_pretrained(compressed_ours_id, low_cpu_mem_usage=True)
         print(f"finish: ours {(time.time() - start_time):.1f} sec")
 

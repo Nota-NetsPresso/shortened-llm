@@ -1,8 +1,10 @@
-import gradio as gr
-from demo import LlamaCompressionDemo
-from pathlib import Path
 import os
 import subprocess
+from pathlib import Path
+
+import gradio as gr
+from demo import LlamaCompressionDemo
+
 
 ORIG_CHECKPOINT_ID = "baffo32/decapoda-research-llama-7B-hf"
 COMPRESSED_OURS_ID = "nota-ai/st-llama-1-5.5b-ppl"
@@ -62,7 +64,7 @@ if __name__ == "__main__":
             # LLM-Pruner
             with gr.Column(variant="panel", scale=32):
                 gr.Markdown('<h2 align="center">LLM-Pruner (Width✄) [NeurIPS\'23]</h2>')
-                gr.Markdown(f"###### {servicer.get_params(servicer.model_ours)}")  
+                gr.Markdown(f"###### {servicer.get_params(servicer.model_ours)}")
 
                 with gr.Column():
                     gen_llmprn_button = gr.Button(value="Generate with LLM-Pruner", variant="primary")
@@ -75,7 +77,7 @@ if __name__ == "__main__":
             # Shortened-LLaMA (Ours)
             with gr.Column(variant="panel", scale=32):
                 gr.Markdown('<h2 align="center">Ours (Depth✄) [ICLRW\'24]</h2>')
-                gr.Markdown(f"###### {servicer.get_params(servicer.model_ours)}")  
+                gr.Markdown(f"###### {servicer.get_params(servicer.model_ours)}")
 
                 with gr.Column():
                     gen_ours_button = gr.Button(value="Generate with Shortened LLaMA", variant="primary")

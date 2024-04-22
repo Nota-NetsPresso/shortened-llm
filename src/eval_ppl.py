@@ -1,16 +1,18 @@
 import argparse
-import torch
-import time
-import os
 import csv
+import os
+import time
+
+import torch
 from LLMPruner.evaluator.ppl import PPLMetric
-from utils import set_seed, get_model, count_params
+from utils import count_params, get_model, set_seed
+
 
 def eval_ppl_wikitext2_ptb(output_dir, model, tokenizer, max_seq_len=128, device="cuda"):
     # measure ppl
     csv_log_path = os.path.join(output_dir, 'ppl.csv')
     t0 = time.perf_counter()
-    ppl_wikitext2 = PPLMetric(model, tokenizer, ['wikitext2'], max_seq_len, device=device)   
+    ppl_wikitext2 = PPLMetric(model, tokenizer, ['wikitext2'], max_seq_len, device=device)
     print(f"PPL-WikiText2: {ppl_wikitext2} | time: {time.perf_counter()-t0}")
     t0 = time.perf_counter()
     ppl_ptb = PPLMetric(model, tokenizer, ['ptb'], max_seq_len, device=device)
@@ -23,18 +25,18 @@ def eval_ppl_wikitext2_ptb(output_dir, model, tokenizer, max_seq_len=128, device
     with open(csv_log_path, 'w') as logfile:
         logwriter = csv.writer(logfile, delimiter=',')
         logwriter.writerow(['ppl_wikitext2', 'ppl_ptb', 'params', 'mem'])
-        logwriter.writerow([ppl_wikitext2['wikitext2'], ppl_ptb['ptb'], nparams, mem])       
+        logwriter.writerow([ppl_wikitext2['wikitext2'], ppl_ptb['ptb'], nparams, mem])
 
 def generate_txt(output_dir, model, tokenizer,
                  input_prompt="The Leaning Tower of Pisa is known for",
                  num_output=5, top_k=50, top_p=0.95, temperature=1., max_seq_len=128, device="cuda"):
-    # generate a few samples    
+    # generate a few samples
     txt_path = os.path.join(output_dir, 'gen_text.txt')
     inputs = tokenizer(input_prompt, return_tensors="pt")["input_ids"].to(device)
     input_len=inputs[0].size(0)
 
     with open(txt_path, 'w', encoding='utf8') as f:
-        f.write(f"=== input ===\n")
+        f.write("=== input ===\n")
         f.write(f"{input_prompt}\n")
 
     for i in range(num_output):
@@ -48,18 +50,18 @@ def generate_txt(output_dir, model, tokenizer,
                 max_length=(input_len+max_seq_len),
                 min_length=(input_len+max_seq_len), # forced output length (to avoid <EOS> sampling)
                 return_dict_in_generate=True,
-            )    
+            )
         s = generation_output.sequences[0]
         output_len = len(s)
         output = tokenizer.decode(s)
-              
+
         print(f"=== output {i} | leng gen {output_len-input_len} + input {input_len}\n")
-        print(output)        
+        print(output)
 
         with open(txt_path, 'a', encoding='utf8') as f:
             f.write(f"=== output {i} | leng gen {output_len-input_len} + input {input_len}\n")
             f.write(f"{output}\n")
-            
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--base_model', type=str, default="baffo32/decapoda-research-llama-7B-hf", help='base model name')
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     parser.add_argument('--top_p', type=float, default=0.95)
     parser.add_argument('--top_k', type=float, default=50)
     parser.add_argument('--temperature', type=float, default=1)
-    parser.add_argument('--max_seq_len', type=int, default=128)    
+    parser.add_argument('--max_seq_len', type=int, default=128)
     parser.add_argument('--output_dir', type=str, default="results/llama-7b-hf/ppl")
     parser.add_argument('--fix_decapoda_config', default=False, action="store_true", help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf")
     args = parser.parse_args()
@@ -82,10 +84,10 @@ if __name__ == "__main__":
     set_seed(args.seed)
     model, tokenizer, description = get_model(base_model=args.base_model, ckpt=args.ckpt, lora_ckpt=args.lora_ckpt,
                                               tokenizer=args.tokenizer, model_type=args.model_type, device=args.device,
-                                              fix_decapoda_config=args.fix_decapoda_config)    
+                                              fix_decapoda_config=args.fix_decapoda_config)
 
-    os.makedirs(args.output_dir, exist_ok=True)    
-    
+    os.makedirs(args.output_dir, exist_ok=True)
+
     eval_ppl_wikitext2_ptb(args.output_dir, model, tokenizer, args.max_seq_len, args.device)
     generate_txt(args.output_dir, model, tokenizer,
                  input_prompt=args.input_prompt,

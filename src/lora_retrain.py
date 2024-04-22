@@ -2,12 +2,12 @@
 Refer to
 https://github.com/tloen/alpaca-lora/blob/main/finetune.py
 '''
-import os
 import argparse
+import os
+
 import torch
 import transformers
 from datasets import load_dataset
-
 from LLMPruner.peft import (
     LoraConfig,
     get_peft_model,
@@ -15,15 +15,16 @@ from LLMPruner.peft import (
     prepare_model_for_int8_training,
 )
 from LLMPruner.utils.prompter import Prompter, ZeroPrompter
-from utils import set_seed, get_model
+from utils import get_model, set_seed
+
 
 def main(args):
     os.environ["WANDB_PROJECT"] = args.wandb_project
     set_seed(args.seed)
-    
+
     model, tokenizer, description = get_model(base_model=args.base_model, ckpt=args.ckpt, lora_ckpt=None,
                                         tokenizer=args.tokenizer, model_type=args.model_type, device=args.device,
-                                        fix_decapoda_config=args.fix_decapoda_config)   
+                                        fix_decapoda_config=args.fix_decapoda_config)
 
     gradient_accumulation_steps = args.batch_size // args.micro_batch_size
     if not args.no_instruction:
@@ -106,7 +107,7 @@ def main(args):
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, config)
-    model.print_trainable_parameters()  
+    model.print_trainable_parameters()
 
     # Load Train Dataset
     data = load_dataset(args.data_path)
@@ -119,10 +120,10 @@ def main(args):
     val_data = {
         args.data_path: train_val["test"].shuffle().map(generate_and_tokenize_prompt),
     }
-   
+
     # Load Extra Validation Dataset
     if args.extra_val_dataset:
-        from LLMPruner.datasets.ppl_dataset import get_wikitext2, get_ptb
+        from LLMPruner.datasets.ppl_dataset import get_ptb, get_wikitext2
 
         seq_len = 128
         for extra_dataset in args.extra_val_dataset.split(','):
@@ -184,7 +185,7 @@ def main(args):
 
         set_seed(args.seed)
         model, tokenizer, description = get_model(base_model=args.base_model, ckpt=args.ckpt, lora_ckpt=None,
-                                    tokenizer=args.tokenizer, model_type=args.model_type, device=args.device)  
+                                    tokenizer=args.tokenizer, model_type=args.model_type, device=args.device)
 
         from LLMPruner.peft import PeftModel
         lora_model = PeftModel.from_pretrained(model, args.output_dir, torch_dtype=torch.float16)
@@ -201,7 +202,7 @@ def main(args):
         model.save_pretrained(
             os.path.join(args.output_dir+'_lora_merge_fp16'), state_dict=deloreanized_sd, max_shard_size="10GB"
         )
-        tokenizer.save_pretrained(os.path.join(args.output_dir+'_lora_merge_fp16')) 
+        tokenizer.save_pretrained(os.path.join(args.output_dir+'_lora_merge_fp16'))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -214,10 +215,10 @@ if __name__ == "__main__":
     parser.add_argument('--device', type=str, default="cuda", help='device')
     parser.add_argument('--save_lora_merge', action='store_true')
     parser.add_argument('--fix_decapoda_config', default=False, action="store_true", help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf")
-    
+
     parser.add_argument('--data_path', type=str, default="yahma/alpaca-cleaned", help='data path')
     parser.add_argument('--extra_val_dataset', type=str, default=None, help='validation datasets. Split with ","')
-    parser.add_argument('--output_dir', type=str, default="./lora-alpaca", help='output directory')    
+    parser.add_argument('--output_dir', type=str, default="./lora-alpaca", help='output directory')
     parser.add_argument('--seed', type=int, default=1234)
 
     # Training Hyperparameters
@@ -240,11 +241,11 @@ if __name__ == "__main__":
     parser.add_argument('--train_on_inputs', default=False, action="store_true", help='Train on inputs. If False, masks out inputs in loss')
     parser.add_argument('--add_eos_token', default=False, action="store_true")
     parser.add_argument('--group_by_length', default=False, action="store_true", help="faster, but produces an odd training loss curve")
-   
+
     # wandb params
     parser.add_argument('--wandb_project', type=str, default="")
     parser.add_argument('--resume_from_checkpoint', type=str, help="either training checkpoint or final adapter")
-   
+
     args = parser.parse_args()
 
     main(args)

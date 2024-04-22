@@ -2,8 +2,10 @@ import argparse
 import json
 import logging
 import os
-from lm_eval import tasks, evaluator, utils
+
+from lm_eval import evaluator, tasks, utils
 from utils import convert_json2csv_zeroshot
+
 
 logging.getLogger("openai").setLevel(logging.WARNING)
 
@@ -33,9 +35,9 @@ def parse_args():
     return parser.parse_args()
 
 def main():
-    args = parse_args()    
+    args = parse_args()
     assert not args.provide_description  # not implemented
-    
+
     if args.limit:
         print(
             "WARNING: --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
@@ -82,10 +84,10 @@ def main():
         f"{args.model} ({args.model_args}), limit: {args.limit}, provide_description: {args.provide_description}, "
         f"num_fewshot: {args.num_fewshot}, batch_size: {args.batch_size}{f' ({batch_sizes})' if batch_sizes else ''}"
     )
-    print(evaluator.make_table(results))    
-    
+    print(evaluator.make_table(results))
+
     csv_path = args.output_json.replace('.json', '.csv')
     convert_json2csv_zeroshot(args.output_json, csv_path)
-    
+
 if __name__ == "__main__":
     main()
