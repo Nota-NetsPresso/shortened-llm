@@ -18,3 +18,4 @@ omegaconf==2.3.0
 pytablewriter==1.0.0
 gradio==3.45.2
 googletrans==4.0.0-rc1
+ruff==0.4.1

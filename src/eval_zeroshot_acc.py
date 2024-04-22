@@ -2,26 +2,39 @@ import argparse
 import json
 import logging
 import os
-from lm_eval import tasks, evaluator, utils
+
+from lm_eval import evaluator, tasks, utils
 from utils import convert_json2csv_zeroshot
 
+
 logging.getLogger("openai").setLevel(logging.WARNING)
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", required=True)
     parser.add_argument("--model_args", default="")
-    parser.add_argument("--tasks", default=None, choices=utils.MultiChoice(tasks.ALL_TASKS))
+    parser.add_argument(
+        "--tasks", default=None, choices=utils.MultiChoice(tasks.ALL_TASKS)
+    )
     parser.add_argument("--provide_description", action="store_true")
     parser.add_argument("--num_fewshot", type=int, default=0)
     parser.add_argument("--batch_size", type=str, default=None)
-    parser.add_argument("--max_batch_size", type=int, default=None,
-                        help="Maximal batch size to try with --batch_size auto")
+    parser.add_argument(
+        "--max_batch_size",
+        type=int,
+        default=None,
+        help="Maximal batch size to try with --batch_size auto",
+    )
     parser.add_argument("--device", type=str, default=None)
     parser.add_argument("--output_json", default=None)
-    parser.add_argument("--limit", type=float, default=None,
-                        help="Limit the number of examples per task. "
-                             "If <1, limit is a percentage of the total number of examples.")
+    parser.add_argument(
+        "--limit",
+        type=float,
+        default=None,
+        help="Limit the number of examples per task. "
+        "If <1, limit is a percentage of the total number of examples.",
+    )
     parser.add_argument("--data_sampling", type=float, default=None)
     parser.add_argument("--no_cache", action="store_true")
     parser.add_argument("--decontamination_ngrams_path", default=None)
@@ -32,10 +45,11 @@ def parse_args():
 
     return parser.parse_args()
 
+
 def main():
-    args = parse_args()    
+    args = parse_args()
     assert not args.provide_description  # not implemented
-    
+
     if args.limit:
         print(
             "WARNING: --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
@@ -82,10 +96,11 @@ def main():
         f"{args.model} ({args.model_args}), limit: {args.limit}, provide_description: {args.provide_description}, "
         f"num_fewshot: {args.num_fewshot}, batch_size: {args.batch_size}{f' ({batch_sizes})' if batch_sizes else ''}"
     )
-    print(evaluator.make_table(results))    
-    
-    csv_path = args.output_json.replace('.json', '.csv')
+    print(evaluator.make_table(results))
+
+    csv_path = args.output_json.replace(".json", ".csv")
     convert_json2csv_zeroshot(args.output_json, csv_path)
-    
+
+
 if __name__ == "__main__":
     main()
