@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from eval_ppl import eval_ppl_wikitext2_ptb, generate_txt
+from eval_ppl import eval_ppl, generate_txt
 from utils import get_block_pruned_network, get_model, set_seed
 
 
@@ -92,8 +92,12 @@ if __name__ == "__main__":
     if not args.skip_validation:
         score_dir = os.path.join(args.output_dir + "_score")
         os.makedirs(score_dir, exist_ok=True)
-        eval_ppl_wikitext2_ptb(
-            output_dir=score_dir, model=model, tokenizer=tokenizer, device=args.device
+        eval_ppl(
+            output_dir=score_dir,
+            model=model,
+            tokenizer=tokenizer,
+            datasets=["wikitext2", "ptb"],
+            device=args.device,
         )
         generate_txt(
             output_dir=score_dir, model=model, tokenizer=tokenizer, device=args.device

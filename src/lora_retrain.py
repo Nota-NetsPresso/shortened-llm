@@ -93,7 +93,6 @@ def main(args):
         test_ids = tokenizer(
             "\n\n".join(test_data[field_name]), return_tensors="pt"
         ).input_ids[0]
-        test_ids_batch = []
         nsamples = test_ids.numel() // seq_len
 
         test_set = []
@@ -127,7 +126,7 @@ def main(args):
 
     # Load Extra Validation Dataset
     if args.extra_val_dataset:
-        from LLMPruner.datasets.ppl_dataset import get_ptb, get_wikitext2
+        from dataset import get_ptb, get_wikitext2
 
         seq_len = 128
         for extra_dataset in args.extra_val_dataset.split(","):

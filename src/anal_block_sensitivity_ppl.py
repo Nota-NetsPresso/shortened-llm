@@ -5,7 +5,7 @@ import time
 
 import numpy as np
 import torch
-from LLMPruner.datasets.example_samples import get_examples
+from dataset import get_examples
 from utils import count_params, get_block_pruned_network, get_model, set_seed
 
 

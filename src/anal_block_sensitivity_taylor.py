@@ -3,7 +3,7 @@ import csv
 import os
 
 import torch
-from LLMPruner.datasets.example_samples import get_examples
+from dataset import get_examples
 from utils import get_model, set_seed
 
 
