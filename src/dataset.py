@@ -79,47 +79,45 @@ def get_loaders(name, tokenizer, seq_len=2048, batch_size=8, add_bos_to_every=Fa
     return train_data, test_loader
 
 
-def get_c4_examples(tokenizer, n_samples, seq_len):
-    traindata = load_dataset(
-        "allenai/c4",
-        "allenai--c4",
-        data_files={"train": "en/c4-train.00000-of-01024.json.gz"},
-        split="train",
-    )
-
-    tokenized_samples, history = [], []
-    for _ in range(n_samples):
-        while True:
-            i = random.randint(0, len(traindata) - 1)
-            tokenized_sample = tokenizer(traindata[i]["text"], return_tensors="pt")
-            if tokenized_sample.input_ids.shape[1] >= seq_len and i not in history:
-                history.append(i)
-                break
-        i = random.randint(0, tokenized_sample.input_ids.shape[1] - seq_len)
-        tokenized_samples.append(tokenized_sample.input_ids[:, i : i + seq_len])
-    return torch.cat(tokenized_samples, dim=0)
-
-
-def get_bookcorpus_examples(tokenizer, n_samples, seq_len):
-    traindata = load_dataset("bookcorpus", split="train")
-
-    tokenized_samples, history = [], []
-    for _ in range(n_samples):
-        while True:
-            i = random.randint(0, len(traindata) - 1)
-            tokenized_sample = tokenizer(traindata[i]["text"], return_tensors="pt")
-            if tokenized_sample.input_ids.shape[1] >= seq_len and i not in history:
-                history.append(i)
-                break
-        i = random.randint(0, tokenized_sample.input_ids.shape[1] - seq_len)
-        tokenized_samples.append(tokenized_sample.input_ids[:, i : i + seq_len])
-    return torch.cat(tokenized_samples, dim=0)
-
-
-def get_examples(dataset, tokenizer, n_samples, seq_len=128):
+def get_examples(
+    dataset,
+    tokenizer,
+    n_samples,
+    seq_len=128,
+    field_name="text",
+    add_bos_to_every=False,
+):
     if dataset == "c4":
-        return get_c4_examples(tokenizer, n_samples, seq_len)
+        traindata = load_dataset(
+            "allenai/c4",
+            "allenai--c4",
+            data_files={"train": "en/c4-train.00000-of-01024.json.gz"},
+            split="train",
+        )
     elif dataset == "bookcorpus":
-        return get_bookcorpus_examples(tokenizer, n_samples, seq_len)
+        traindata = load_dataset("bookcorpus", split="train")
     else:
         raise NotImplementedError
+
+    tokenized_samples, history = [], []
+
+    for _ in range(n_samples):
+        while True:
+            i = random.randint(0, len(traindata) - 1)
+            tokenized_sample = tokenizer(
+                traindata[i][field_name],
+                return_tensors="pt",
+                add_special_tokens=not add_bos_to_every,
+            )
+            if tokenized_sample.input_ids.shape[1] >= seq_len and i not in history:
+                history.append(i)
+                break
+        j = random.randint(0, tokenized_sample.input_ids.shape[1] - seq_len)
+        tmp_ids = tokenized_sample.input_ids[:, j : j + seq_len]
+        if add_bos_to_every:  # add bos token to every segment (especially for gemma)
+            tmp_ids = torch.cat(
+                (torch.LongTensor([[tokenizer.bos_token_id]]), tmp_ids[:, :-1]), dim=1
+            )
+        tokenized_samples.append(tmp_ids)
+
+    return torch.cat(tokenized_samples, dim=0)

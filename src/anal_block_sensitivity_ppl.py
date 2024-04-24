@@ -41,6 +41,12 @@ if __name__ == "__main__":
         action="store_true",
         help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf",
     )
+    parser.add_argument(
+        "--add_bos_to_every",
+        default=False,
+        action="store_true",
+        help="whether to add BOS token to every sample in calibration dataset",
+    )
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -64,8 +70,14 @@ if __name__ == "__main__":
 
         # Evaluate the model with a single block removal
         example_prompts = get_examples(
-            "bookcorpus", tokenizer, args.num_calib_data, seq_len=args.max_seq_len
+            dataset="bookcorpus",
+            tokenizer=tokenizer,
+            n_samples=args.num_calib_data,
+            seq_len=args.max_seq_len,
+            field_name="text",
+            add_bos_to_every=args.add_bos_to_every,
         ).to(args.device)
+
         for block_idx in range(model_orig.config.__getattribute__("num_hidden_layers")):
             csv_log_path = os.path.join(
                 args.output_dir, f"ppl_block{block_idx}_removed.csv"
