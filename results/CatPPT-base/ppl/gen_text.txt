@@ -1,0 +1,30 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 11
+<s> The Leaning Tower of Pisa is known for being the famous bell tower of the Cathedral, which is in fact, a few metres off-centre and started to lean soon after its construction.
+
+The bell tower’s tilt first made the construction a laughing stock, but then it became the focus of engineering studies and has also been a main tourist attraction in Tuscany ever since. The tilting was caused by a combination of poor foundation soil and the weight of the structures above the weak foundations. It is the off-centre foundation which has been the cause of the leaning.
+
+The famous Leaning Tower of Pisa, which is 56
+=== output 1 | leng gen 128 + input 11
+<s> The Leaning Tower of Pisa is known for its tilted architecture. However, have you ever seen a tower standing vertically while a nearby tower leans? In this case, you can see a building in Pisa that’s being built adjacent to the world-renowned Leaning Tower. It’s the Tower of Pisa New Belfry, a 73-meter (240 feet) tall and entirely vertical tower!
+
+The New Belfry was designed by Renzo Piano, the Italian architect who was also the driving force behind the project that stabilized the Leaning Tower. He has worked on several architectural projects worldwide.
+=== output 2 | leng gen 128 + input 11
+<s> The Leaning Tower of Pisa is known for its lean to the left. It is a tower which is not straight and this is due to its unstable foundation.
+
+The Leaning Tower of Pisa is not the only structure that is not straight. A few years ago there were news of a crooked building in Chicago (this is known as 875 North Michigan Avenue).
+
+Why do some structures turn out to be unbalanced or leaning? There are a number of possible causes but it all usually relates to one key thing — the foundation. The foundation is like the base of a plant.
+
+A stable foundation is important because it bears the
+=== output 3 | leng gen 128 + input 11
+<s> The Leaning Tower of Pisa is known for being the famous bell tower of the cathedral complex. The bell tower’s unintended tilt is an iconic phenomenon in Pisa, Italy and has made it a major tourist attraction. It is actually part of the cathedral complex that also includes a baptistery and the cathedral itself. The tower began leaning during the construction when the ground beneath one side of the tower was so soft that it started to sink.
+
+The tilt started to become apparent soon after the construction was started in 1173. While it has been steadily leaning from the start, its tilting speed increased in the early 1
+=== output 4 | leng gen 128 + input 11
+<s> The Leaning Tower of Pisa is known for its tilt, but is there more to the story? Here are some facts about the famous Italian landmark.
+
+The Leaning Tower of Pisa is a fascinating architectural structure that is world-famous for its tilt. The tower is located in the Italian city of Pisa, in Tuscany. It is part of a larger complex, the Piazza dei Miracoli, which also includes the Duomo, the Baptistry and the Camposanto.
+
+Throughout the centuries, the leaning tower has captured people's imaginations, with its unique tilt and the challenges it has presented. Here

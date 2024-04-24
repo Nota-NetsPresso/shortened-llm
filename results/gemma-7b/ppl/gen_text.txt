@@ -1,0 +1,24 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its architectural imperfection. While its original structure was planned by the architect Bonanno Pisano, the structure of the tower was changed over the years due to construction errors. The tower, which is supported by four columns, leans 4 degrees from the vertical due to the fact that two of the four columns were built at unequal heights and the weight is distributed on different sides. As a result, the tower tilts 2.5 meters.
+
+One of the ways to improve the stability of the Tower of Pisa is to build the other columns taller to compensate for the difference in height between them. Another option is to reduce the height of the
+=== output 1 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for many things. It's known for being, you know, really tall and leaning. It's known for being really famous. It's known for the fact that it has a big green ball on top. But more than anything, it's known as the location where, in the video game <i>Perfect Dark Zero</i>, a woman is known as "Tower" drops a bowling ball on top of a man's head. And while the tower itself may be famous (even if you've never been to Pisa), we doubt many people know the story behind the ball that goes on top of it. Until now
+=== output 2 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its lean, which is the result of an error made while it was being built. If the tower is $57 \mathrm{~m}$ tall and leans $5.6^{\circ}$ from the vertical, calculate the displacement of the top of the tower from the center of the base.
+
+What is a “holding section” in memory?
+
+What is the value of resistor $R$
+
+If you used $1000 \mathrm{~J}$ of energy to throw a ball, would it travel faster if you threw the ball (ignoring air resistance) $(a)$ so that it was also rotating? $(b
+=== output 3 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its construction mistakes which have given it a 4 degree lean. The 6th century Church of San Pantaleone and the late 11th century Palazzo dell'Opera in Lucca have similar leans of 4.75 and 5 degrees, respectively. The late 16th century Palazzo della Ragione and the early 17th century Palazzo Comunale are leaning buildings in Pavia, Italy. The late 17th century tower of the church of St. James in Dublin, Ireland, is also leaning. The early 20th century Casa Battlo, Barcelona is a lean building with 4.
+=== output 4 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for, well, its lean. But this historic monument is not the only structure in the world that is slightly off-center. These unusual buildings feature their own twists, angles, and bends — making for unique photos and memories.
+
+In fact, there are so many unusual buildings that it can be hard to know where to start. So we’ve put together a handy list of nine of our favorites.
+
+You’ll have to head to Asia if you want to see the oldest one on the list, which was built by Buddhist monks more than a thousand years ago. One of the most unusual ones you can see is in your own

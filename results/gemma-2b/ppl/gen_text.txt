@@ -1,0 +1,27 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its architectural imperfection. While its architecture is a work of genius, not all of the building is constructed in a perfectly vertical position. Its tilt is one of the world’s best-known phenomena. While its tilt may seem to be a defect, it was actually a construction technique designed to give the tower its unique appearance. It’s also the most visited leaning tower in the world.
+
+This 67-metre-tall structure is one of the world’s most famous buildings. As a result, it draws the interest of many people from all over the world. It stands 56 m (184 ft.)
+=== output 1 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its tilting. A 4.5m height difference makes the tower of about 42% tilting. This is what the Pisa Tower has been known for, as well as for its amazing architecture. The Leaning Tower is an example of one of the engineering marvels of the late Middle Ages. The tower was built on a soft ground where the weight of the structure is not evenly distributed and this causes it to lean.
+
+<h2><strong>The Leaning Tower of Pisa</strong></h2>
+
+The Leaning Tower of Pisa is about 56m high and weighs 700 tons. Because of this huge weight, it is not that
+=== output 2 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its lean, the tilt of about 5 degrees from being upright. But did you know that the tilt has been getting worse over the years? In 2001, the tilt was measured at 4.94 degrees. By 2017, the tilt had increased to 5.50 degrees. But why has this tilt been changing over the years? And will the tower eventually topple over?
+
+Leaning Towers of Pisa - Google Search
+
+It might seem like a tower can't lean; it seems like it must always be upright, but the real reason for a tower being tilted isn'
+=== output 3 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for its leaning characteristics, measuring $30^{\circ}$ from the vertical when straight up (see figure). At the top and bottom of the tower, where its height $h$ in feet above the ground is known, a person standing on the flat top or bottom of the tower can see a monument that is $165^{\circ}$ from horizontal. Find the monument's height on the ground below.
+
+Instant Solution:
+
+Step 1/5
+Step 1: Draw a diagram of the tower, with the leaning angle and the horizontal ground. We can represent the angle between the ground and the monument's path
+=== output 4 | leng gen 128 + input 10
+<bos>The Leaning Tower of Pisa is known for being the tallest freestanding bell tower in the world, but it is also unique in its appearance because of its slight leaning. If a vertical plumb line is extended upward from the top of the tower, it is clear that the tower leans slightly to the south. Another vertical plumb line drawn from the top of the tower is oriented at 30.0° to the north of east. A horizontal plumb line from the top of the tower is oriented at 30.0° west of north. (a) By how much does the tower in the plumb line deviate from vertical (in the plumb line)? (b) What is the

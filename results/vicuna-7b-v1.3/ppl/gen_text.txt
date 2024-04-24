@@ -1,0 +1,21 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its tilt, but did you know there'<s>You are here: Home / News / Members News / Hydro Group Pacific to exhibit at Oceanology International 2020
+Hydro Group Pacific to exhibit at Oceanology International 2020
+March 19, 2020 /0 Comments/in Members News, Uncategorized /by Hydro Group
+Hydro Group Pacific is set to exhibit at Oceanology International 2020, the world’s premier event for marine science and technology, which takes place in London from 17
+=== output 1 | leng gen 128 + input 12
+<s>The Leaning Tower of Pisa is known for its slight lean to one side. The tower began to lean when the soil beneath it began to settantwo, causing it to tilt. This is called plumbing. The tower is one of the most famous buildings in Italy and is a UNESCO World Heritage site. It was built in the 12th century as a bell tower for the Pisa Cathedral. In the 14th century, the tower began to lean, but it was not until the 20th century that the lean was stabilized by reinforcing the foundation. Today, the Leaning Tower of Pisa stands as
+=== output 2 | leng gen 128 + input 12
+<s>The Leaning Tower of Pisa is known for its famous lean. This tower has been a famous landmark for centuries and is a symbol of Italian architecture. Despite its famous lean, it is still open to the public and visitors can climb to the top of the tower for a panoramic view of the surrounding area.
+Tuscany, Italy is the home of the Leaning Tower of Pisa. The city is located on the banks of the Arno River and is known for its beautiful architecture, picturesque countryside, and rich history. Visitors to Tuscany can also explore the city of Florence and its stunning art and architecture.
+=== output 3 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its iconic lean, which has been a mystery to scientists and engineers for centuries. The Tower'<s>9.8.5.5 Cryptography Standards
+As a part of a comprehensive security approach for protecting the application, it is important to consider cryptography standards for secure communication between the components of the system.
+In this section, we will cover commonly used cryptography standards for secure communication, such as SSL/TLS and SHA-256.
+9.8.5.5.1 SSL/TLS
+SSL (Secure Sockets Layer) is a protocol
+=== output 4 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its iconic tilt, but did you know it'<s>The New Audi A8: The Future of Luxury
+For the eighth time, the Audi brand is launching a new version of the A8 luxury sedan, which stands out for its innovative technologies, a luxurious interior and a futuristic design. The new A8 is more than just a car, it is a mobile living space that offers maximum comfort and convenience. The advanced driver assistance systems in the new A8, such as piloted driving, bring a new dimension of safety to the road. Audi also offers a
