@@ -50,6 +50,9 @@ def main(args):
             max_length=args.cutoff_len,
             padding=False,
             return_tensors=None,
+            add_special_tokens=(
+                False or tokenizer.add_bos_token
+            ),  # follow implementation in https://github.com/EleutherAI/lm-evaluation-harness/pull/1465
         )
         if (
             result["input_ids"][-1] != tokenizer.eos_token_id
@@ -89,15 +92,28 @@ def main(args):
             ]  # could be sped up, probably
         return tokenized_full_prompt
 
-    def split_and_tokenizer(test_data, tokenizer, seq_len, field_name):
+    def split_and_tokenizer(
+        test_data, tokenizer, seq_len, field_name, add_bos_to_every=False
+    ):
         test_ids = tokenizer(
-            "\n\n".join(test_data[field_name]), return_tensors="pt"
+            "\n\n".join(test_data[field_name]),
+            return_tensors="pt",
+            add_special_tokens=False,
         ).input_ids[0]
-        nsamples = test_ids.numel() // seq_len
+        if not add_bos_to_every:  # add bos token to only the first segment
+            test_ids = torch.cat(
+                (torch.LongTensor([tokenizer.bos_token_id]), test_ids), dim=0
+            )
 
         test_set = []
+        nsamples = test_ids.numel() // seq_len
+
         for i in range(nsamples):
             batch = test_ids[(i * seq_len) : ((i + 1) * seq_len)]
+            if add_bos_to_every:  # add bos token to every segment
+                batch = torch.cat(
+                    (torch.LongTensor([tokenizer.bos_token_id]), batch), dim=0
+                )
             test_set.append({"input_ids": batch, "labels": batch})
         return test_set
 
@@ -133,12 +149,20 @@ def main(args):
             if "wikitext2" in extra_dataset:
                 _, test_data = get_wikitext2()
                 test_data = split_and_tokenizer(
-                    test_data, tokenizer, seq_len, field_name="text"
+                    test_data,
+                    tokenizer,
+                    seq_len,
+                    field_name="text",
+                    add_bos_to_every=tokenizer.add_bos_token,
                 )
             if "ptb" in extra_dataset:
                 _, test_data = get_ptb()
                 test_data = split_and_tokenizer(
-                    test_data, tokenizer, seq_len, field_name="sentence"
+                    test_data,
+                    tokenizer,
+                    seq_len,
+                    field_name="sentence",
+                    add_bos_to_every=tokenizer.add_bos_token,
                 )
             val_data[extra_dataset] = test_data
 
