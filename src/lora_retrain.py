@@ -131,12 +131,12 @@ def main(args):
         seq_len = 128
         for extra_dataset in args.extra_val_dataset.split(","):
             if "wikitext2" in extra_dataset:
-                _, test_data = get_wikitext2(seq_len, None)
+                _, test_data = get_wikitext2()
                 test_data = split_and_tokenizer(
                     test_data, tokenizer, seq_len, field_name="text"
                 )
             if "ptb" in extra_dataset:
-                _, test_data = get_ptb(seq_len, None)
+                _, test_data = get_ptb()
                 test_data = split_and_tokenizer(
                     test_data, tokenizer, seq_len, field_name="sentence"
                 )

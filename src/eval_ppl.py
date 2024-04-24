@@ -44,20 +44,23 @@ def eval_ppl(
     max_seq_len=128,
     batch_size=4,
     device="cuda",
+    add_bos_to_every=False,
 ):
-    # measure ppl
-    csv_log_path = os.path.join(output_dir, "ppl.csv")
+    filename = "ppl_bos.csv" if add_bos_to_every else "ppl.csv"
+    csv_log_path = os.path.join(output_dir, filename)
     csv_header = []
     csv_value = []
     metric = {}
     for dataset in datasets:
         t0 = time.perf_counter()
         _, test_loader = get_loaders(
-            dataset, tokenizer, seq_len=max_seq_len, batch_size=batch_size
+            dataset, tokenizer, max_seq_len, batch_size, add_bos_to_every
         )
         metric[dataset] = llama_eval(model, test_loader, device)
 
-        print(f"PPL-{dataset}: {metric[dataset]} | time: {time.perf_counter()-t0}")
+        print(
+            f"PPL-{dataset}: {metric[dataset]} | add_bos_to_every: {add_bos_to_every} | time: {time.perf_counter()-t0:.1f}"
+        )
         csv_header.append(f"ppl_{dataset}")
         csv_value.append(metric[dataset])
 
@@ -171,15 +174,16 @@ if __name__ == "__main__":
     )
 
     os.makedirs(args.output_dir, exist_ok=True)
-
-    eval_ppl(
-        output_dir=args.output_dir,
-        model=model,
-        tokenizer=tokenizer,
-        datasets=["wikitext2", "ptb"],
-        max_seq_len=args.max_seq_len,
-        device=args.device,
-    )
+    for add_bos_to_every in [True, False]:
+        eval_ppl(
+            output_dir=args.output_dir,
+            model=model,
+            tokenizer=tokenizer,
+            datasets=["wikitext2", "ptb"],
+            max_seq_len=args.max_seq_len,
+            device=args.device,
+            add_bos_to_every=add_bos_to_every,
+        )
     generate_txt(
         output_dir=args.output_dir,
         model=model,
