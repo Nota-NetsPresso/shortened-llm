@@ -1,0 +1,20 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 12
+<unk>The Leaning Tower of Pisa is known for having tilted over the years due to the soft subsoil on which it was being built. The Tower was designed to be 57 metres (187 ft) high, but the tilt has increased the height by 5.5 metres (18 ft). Pisa is the perfect place to visit if you want to enjoy the best of Tuscany.
+A must-see place in Pisa is the Camposanto (Cemetery), which was once part of the city walls. Inside, you can find the ancient cathedral of Santa Maria Assunta. There are two entrances to the
+=== output 1 | leng gen 128 + input 12
+<unk>The Leaning Tower of Pisa is known for its slight lean to one side. The reason for the slight lean, aside from the tilt caused by an earthquake in 1173, was due to water seeping into the foundation of the structure.
+The Colosseum, known to many as simply ‘the Coliseum’ or ‘the Roman Arena’, is the largest amphitheater ever built. It was used for sports events, gladiatorial fights, mock naval battles, animal fights, and even executions. The Colosseum, or amphitheater, was named after the bronze statue of
+=== output 2 | leng gen 128 + input 12
+<unk>The Leaning Tower of Pisa is known for its 16th-century tilt. The Tower is located in the Piazza dei Miracoli, which is a site that is included in UNESCO's World Heritage List.
+Bell Tower: This bell tower was erected in 1173 and the top of the tower is over 86 meters (282 feet) high.
+Gates: There are two gates to the complex that the Leaning Tower is part of: The North Gate and The Baptistry.
+The Basilica Di Santa Maria Della Fiore: This is a wonderful 14th century
+=== output 3 | leng gen 128 + input 12
+<unk>The Leaning Tower of Pisa is known for being slightly tilted, and you can look over the side to see the 10 foot difference between its two faces. Pisa is well known as a place where you can see a unique phenomenon in nature, which is known as the "march of the tides." People say that when the tides roll in, the Leaning Tower of Pisa bows down toward the sea.
+14. One of the best views in Pisa is the view that you get looking out the windows of the Leaning Tower. People like to climb the tower just to see the views of the city.
+=== output 4 | leng gen 128 + input 12
+<unk>The Leaning Tower of Pisa is known for its slightly crooked foundation and tilt. In the 1990s it was stabilized using a 400-tonne counterweight, anchored by steel cables, thus preventing any further tilt. The tower was designed to be the cathedral's campanile. It is the third oldest structure in the square after the cathedral and the duomo museum.
+As a monument, the tower has been listed by the UNESCO as a World Heritage Site since 1987.
+Most people have heard of the Leaning Tower of Pisa (and yes,

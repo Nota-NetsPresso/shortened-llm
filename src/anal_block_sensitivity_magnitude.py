@@ -3,7 +3,6 @@ import csv
 import os
 
 import torch
-from LLMPruner.datasets.example_samples import get_examples
 from utils import get_model, set_seed
 
 
@@ -73,9 +72,6 @@ if __name__ == "__main__":
             device=args.device,
             fix_decapoda_config=args.fix_decapoda_config,
         )
-        example_prompts = get_examples(
-            "bookcorpus", tokenizer, args.num_calib_data, seq_len=args.max_seq_len
-        ).to(args.device)
 
         # Compute scores of weight matrices -> Collec them
         block_info = {}
