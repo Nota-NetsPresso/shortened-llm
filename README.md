@@ -121,6 +121,7 @@ Click to see a demo screenshot (on an A100 80GB GPU):
 - The intended use is strictly limited to research and non-commercial projects.
 
 ## Acknowledgments
+- [Microsoft for Startups Founders Hub](https://www.microsoft.com/en-us/startups) and [Gwangju AICA](http://www.aica-gj.kr/main.php) for generously providing GPU resources.
 - [LLM-Pruner](https://github.com/horseee/LLM-Pruner), which utilizes [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness), [PEFT](https://github.com/huggingface/peft), and [Alpaca-LoRA](https://github.com/tloen/alpaca-lora). Thanks for the pioneering work on structured pruning of LLMs! 
 - Meta AI's [LLaMA](https://github.com/facebookresearch/llama) and  LMSYS Org's [Vicuna](https://github.com/lm-sys/FastChat/blob/main/docs/vicuna_weights_version.md). Thanks for the open-source LLMs!
 
