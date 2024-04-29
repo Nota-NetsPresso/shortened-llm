@@ -25,20 +25,35 @@ Note on package versions:
 ## Examples
 The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero-shot evaluation.
 - Pruning criterion: PPL (top); Taylor+ (bottom).
-- 20% pruning of [LLaMA-1-7b](https://huggingface.co/baffo32/decapoda-research-llama-7B-hf)
+- 20% pruning of [LLaMA-1-7b](https://huggingface.co/baffo32/decapoda-research-llama-7B-hf) (based on `LlamaForCausalLM`)
   ```bash
   bash script/prune_llama-7b_crit-ppl.sh
   bash script/prune_llama-7b_crit-taylor.sh
   ```
-- 20% pruning of [Vicuna-7b-v1.3](https://huggingface.co/lmsys/vicuna-7b-v1.3)
+- 20% pruning of [Vicuna-7b-v1.3](https://huggingface.co/lmsys/vicuna-7b-v1.3) (based on `LlamaForCausalLM`)
   ```bash
   bash script/prune_vicuna-7b_crit-ppl.sh
   bash script/prune_vicuna-7b_crit-taylor.sh
   ```
-- 21% pruning of [Vicuna-13b-v1.3](https://huggingface.co/lmsys/vicuna-13b-v1.3) 
+- 21% pruning of [Vicuna-13b-v1.3](https://huggingface.co/lmsys/vicuna-13b-v1.3) (based on `LlamaForCausalLM`) 
   ```bash
   bash script/prune_vicuna-13b_crit-ppl.sh
   bash script/prune_vicuna-13b_crit-taylor.sh
+  ```
+- pruning of [CatPPT-base](https://huggingface.co/rishiraj/CatPPT-base) (based on `MistralForCausalLM`)
+  ```bash
+  bash script/prune_CatPPT_crit-ppl.sh
+  bash script/prune_CatPPT_crit-taylor.sh
+  ```
+- pruning of [Gemma-2b](https://huggingface.co/google/gemma-2b) (based on `GemmaForCausalLM`)
+  ```bash
+  bash script/prune_gemma-2b_crit-ppl_yesBOS.sh
+  bash script/prune_gemma-2b_crit-taylor_yesBOS.sh
+  ```
+- pruning of [Gemma-7b](https://huggingface.co/google/gemma-7b) (based on `GemmaForCausalLM`) 
+  ```bash
+  bash script/prune_gemma-7b_crit-ppl_yesBOS.sh
+  bash script/prune_gemma-7b_crit-taylor_yesBOS.sh
   ```
 
 ## Model Description
