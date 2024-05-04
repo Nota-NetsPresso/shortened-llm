@@ -40,7 +40,10 @@ def main(args):
         prompter = ZeroPrompter()
 
     if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.unk_token
+        if tokenizer.unk_token is not None:
+            tokenizer.pad_token = tokenizer.unk_token
+        else:  # e.g., llama-3 (https://huggingface.co/meta-llama/Meta-Llama-3-8B/discussions/36#662315ec5d73c1b9f90482ea)
+            tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
     def tokenize(prompt, add_eos_token=True):
@@ -50,9 +53,6 @@ def main(args):
             max_length=args.cutoff_len,
             padding=False,
             return_tensors=None,
-            add_special_tokens=(
-                False or tokenizer.add_bos_token
-            ),  # follow implementation in https://github.com/EleutherAI/lm-evaluation-harness/pull/1465
         )
         if (
             result["input_ids"][-1] != tokenizer.eos_token_id
@@ -92,28 +92,15 @@ def main(args):
             ]  # could be sped up, probably
         return tokenized_full_prompt
 
-    def split_and_tokenizer(
-        test_data, tokenizer, seq_len, field_name, add_bos_to_every=False
-    ):
+    def split_and_tokenizer(test_data, tokenizer, seq_len, field_name):
         test_ids = tokenizer(
-            "\n\n".join(test_data[field_name]),
-            return_tensors="pt",
-            add_special_tokens=False,
+            "\n\n".join(test_data[field_name]), return_tensors="pt"
         ).input_ids[0]
-        if not add_bos_to_every:  # add bos token to only the first segment
-            test_ids = torch.cat(
-                (torch.LongTensor([tokenizer.bos_token_id]), test_ids), dim=0
-            )
-
-        test_set = []
         nsamples = test_ids.numel() // seq_len
 
+        test_set = []
         for i in range(nsamples):
             batch = test_ids[(i * seq_len) : ((i + 1) * seq_len)]
-            if add_bos_to_every:  # add bos token to every segment
-                batch = torch.cat(
-                    (torch.LongTensor([tokenizer.bos_token_id]), batch), dim=0
-                )
             test_set.append({"input_ids": batch, "labels": batch})
         return test_set
 
@@ -149,20 +136,12 @@ def main(args):
             if "wikitext2" in extra_dataset:
                 _, test_data = get_wikitext2()
                 test_data = split_and_tokenizer(
-                    test_data,
-                    tokenizer,
-                    seq_len,
-                    field_name="text",
-                    add_bos_to_every=tokenizer.add_bos_token,
+                    test_data, tokenizer, seq_len, field_name="text"
                 )
             if "ptb" in extra_dataset:
                 _, test_data = get_ptb()
                 test_data = split_and_tokenizer(
-                    test_data,
-                    tokenizer,
-                    seq_len,
-                    field_name="sentence",
-                    add_bos_to_every=tokenizer.add_bos_token,
+                    test_data, tokenizer, seq_len, field_name="sentence"
                 )
             val_data[extra_dataset] = test_data
 

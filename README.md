@@ -55,6 +55,11 @@ The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero
   bash script/prune_gemma-7b_crit-ppl_yesBOS.sh
   bash script/prune_gemma-7b_crit-taylor_yesBOS.sh
   ```
+- pruning of [Llama-3-8B](https://huggingface.co/meta-llama/Meta-Llama-3-8B) (based on `LlamaForCausalLM`) 
+  ```bash
+  bash script/prune_llama3-8b_crit-ppl.sh
+  bash script/prune_llama3-8b_crit-taylor.sh
+  ```
 
 ## Model Description
 After identifying unimportant Transformer blocks, we perform one-shot pruning and light LoRA-based retraining.

@@ -1,0 +1,144 @@
+Selected Tasks: ['arc_challenge', 'arc_easy', 'boolq', 'hellaswag', 'openbookqa', 'piqa', 'winogrande']
+Task: arc_challenge; number of docs: 1172
+Task: arc_challenge; document 0; context prompt (starting on next line):
+Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?
+Answer:
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' The air stays cleaner.')[0]
+, Req_loglikelihood('Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' Cars can travel at faster speeds.')[0]
+, Req_loglikelihood('Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' The skills of the drivers improve.')[0]
+, Req_loglikelihood('Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' It becomes safer to drive on the roads.')[0]
+]
+Task: arc_easy; number of docs: 2376
+Task: arc_easy; document 0; context prompt (starting on next line):
+Question: Which is the function of the gallbladder?
+Answer:
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Question: Which is the function of the gallbladder?\nAnswer:', ' store bile')[0]
+, Req_loglikelihood('Question: Which is the function of the gallbladder?\nAnswer:', ' produce bile')[0]
+, Req_loglikelihood('Question: Which is the function of the gallbladder?\nAnswer:', ' store digestive enzymes')[0]
+, Req_loglikelihood('Question: Which is the function of the gallbladder?\nAnswer:', ' produce digestive enzymes')[0]
+]
+Task: boolq; number of docs: 3270
+Task: boolq; document 0; context prompt (starting on next line):
+NCIS: New Orleans (season 4) -- The fourth season of NCIS: New Orleans premiered on September 26, 2017 on CBS. The series continues to air following Bull, Tuesday at 10:00 p.m. (ET) and contained 24 episodes. The season concluded on May 15, 2018.
+Question: is ncis new orleans over for the season?
+Answer:
+(end of prompt on previous line)
+Requests: (Req_loglikelihood('NCIS: New Orleans (season 4) -- The fourth season of NCIS: New Orleans premiered on September 26, 2017 on CBS. The series continues to air following Bull, Tuesday at 10:00 p.m. (ET) and contained 24 episodes. The season concluded on May 15, 2018.\nQuestion: is ncis new orleans over for the season?\nAnswer:', ' yes')[0]
+, Req_loglikelihood('NCIS: New Orleans (season 4) -- The fourth season of NCIS: New Orleans premiered on September 26, 2017 on CBS. The series continues to air following Bull, Tuesday at 10:00 p.m. (ET) and contained 24 episodes. The season concluded on May 15, 2018.\nQuestion: is ncis new orleans over for the season?\nAnswer:', ' no')[0]
+)
+Task: hellaswag; number of docs: 10042
+Task: hellaswag; document 0; context prompt (starting on next line):
+Personal Care and Style: How to increase breast size with a bra. Check your bra size. Wearing a bra that is too big will not make your breasts look larger. That is why it is important to wear the right size bra for you.
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Personal Care and Style: How to increase breast size with a bra. Check your bra size. Wearing a bra that is too big will not make your breasts look larger. That is why it is important to wear the right size bra for you.', ' You can visit a lingerie shop and have them measure you to help you fit a bra to your size, or measure yourself before you shop for a new bra to ensure that you get a good fit. Use a flexible tape measure, like one found in a sewing kit.')[0]
+, Req_loglikelihood('Personal Care and Style: How to increase breast size with a bra. Check your bra size. Wearing a bra that is too big will not make your breasts look larger. That is why it is important to wear the right size bra for you.', ' This is why it is important to keep your breasts under protection when in the shower and only wear bras that are larger than your breast size. If you are not wearing a bra, try wearing something that is a little bigger.')[0]
+, Req_loglikelihood('Personal Care and Style: How to increase breast size with a bra. Check your bra size. Wearing a bra that is too big will not make your breasts look larger. That is why it is important to wear the right size bra for you.', ' For a girl, a bra with a support strap will be easier for her, because most women are unable to pull through bra straps and bras that are too small will not be able to support breasts from side-to-side. Many bras have even been created that cover the breast side, and can be sent to other women in the world to make them look bigger.')[0]
+, Req_loglikelihood('Personal Care and Style: How to increase breast size with a bra. Check your bra size. Wearing a bra that is too big will not make your breasts look larger. That is why it is important to wear the right size bra for you.', ' Choose a color that is flattering to your breast type and specific event, in addition to those that make you uncomfortable. Look for sports bras made from natural material, such as spandex or lycra, as this is a more breathable bra.')[0]
+]
+Task: openbookqa; number of docs: 500
+Task: openbookqa; document 0; context prompt (starting on next line):
+Atomic 26 is drawn to a device, it could be
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Atomic 26 is drawn to a device, it could be', ' magnetized')[0]
+, Req_loglikelihood('Atomic 26 is drawn to a device, it could be', ' Na')[0]
+, Req_loglikelihood('Atomic 26 is drawn to a device, it could be', ' compass')[0]
+, Req_loglikelihood('Atomic 26 is drawn to a device, it could be', ' K')[0]
+]
+Task: piqa; number of docs: 1838
+Task: piqa; document 0; context prompt (starting on next line):
+Question: Remove seeds from  strawberries
+Answer:
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Question: Remove seeds from  strawberries\nAnswer:', ' Blend the strawberries, pour the mixture through a fine-mesh strainer with a bowl underneath to catch the pulps and strain out the seeds')[0]
+, Req_loglikelihood('Question: Remove seeds from  strawberries\nAnswer:', ' Chop up the strawberries, pour the mixture through a fine-mesh strainer with a bowl underneath to catch the pulps and strain out the seeds')[0]
+]
+Task: winogrande; number of docs: 1267
+Task: winogrande; document 0; context prompt (starting on next line):
+People think Rebecca
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('People think Samantha', ' is embarassed, because Samantha made snide comments about the shirt Rebecca was wearing.')[0]
+, Req_loglikelihood('People think Rebecca', ' is embarassed, because Samantha made snide comments about the shirt Rebecca was wearing.')[0]
+]
+Running loglikelihood requests
+{
+  "results": {
+    "arc_challenge": {
+      "acc": 0.5025597269624573,
+      "acc_stderr": 0.014611199329843788,
+      "acc_norm": 0.5298634812286689,
+      "acc_norm_stderr": 0.0145853058400071
+    },
+    "arc_easy": {
+      "acc": 0.8026094276094277,
+      "acc_stderr": 0.008167394336065757,
+      "acc_norm": 0.7777777777777778,
+      "acc_norm_stderr": 0.008530798843887924
+    },
+    "boolq": {
+      "acc": 0.8116207951070337,
+      "acc_stderr": 0.006838889748177183
+    },
+    "hellaswag": {
+      "acc": 0.6016729735112527,
+      "acc_stderr": 0.004885529674958325,
+      "acc_norm": 0.7913762198765186,
+      "acc_norm_stderr": 0.004054944548370495
+    },
+    "openbookqa": {
+      "acc": 0.348,
+      "acc_stderr": 0.0213237286328075,
+      "acc_norm": 0.45,
+      "acc_norm_stderr": 0.022270877485360437
+    },
+    "piqa": {
+      "acc": 0.7965179542981502,
+      "acc_stderr": 0.009393041784049923,
+      "acc_norm": 0.809031556039173,
+      "acc_norm_stderr": 0.009170836637011896
+    },
+    "winogrande": {
+      "acc": 0.7348066298342542,
+      "acc_stderr": 0.01240654946619286
+    }
+  },
+  "versions": {
+    "arc_challenge": 0,
+    "arc_easy": 0,
+    "boolq": 1,
+    "hellaswag": 0,
+    "openbookqa": 0,
+    "piqa": 0,
+    "winogrande": 0
+  },
+  "config": {
+    "model": "hf-causal-experimental",
+    "model_args": "pretrained=meta-llama/Meta-Llama-3-8B",
+    "num_fewshot": 0,
+    "batch_size": null,
+    "batch_sizes": [],
+    "device": "cuda",
+    "no_cache": true,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "description_dict": {}
+  }
+}
+hf-causal-experimental (pretrained=meta-llama/Meta-Llama-3-8B), limit: None, provide_description: False, num_fewshot: 0, batch_size: None
+|    Task     |Version| Metric |Value |   |Stderr|
+|-------------|------:|--------|-----:|---|-----:|
+|arc_challenge|      0|acc     |0.5026|±  |0.0146|
+|             |       |acc_norm|0.5299|±  |0.0146|
+|arc_easy     |      0|acc     |0.8026|±  |0.0082|
+|             |       |acc_norm|0.7778|±  |0.0085|
+|boolq        |      1|acc     |0.8116|±  |0.0068|
+|hellaswag    |      0|acc     |0.6017|±  |0.0049|
+|             |       |acc_norm|0.7914|±  |0.0041|
+|openbookqa   |      0|acc     |0.3480|±  |0.0213|
+|             |       |acc_norm|0.4500|±  |0.0223|
+|piqa         |      0|acc     |0.7965|±  |0.0094|
+|             |       |acc_norm|0.8090|±  |0.0092|
+|winogrande   |      0|acc     |0.7348|±  |0.0124|
+
+results/Meta-Llama-3-8B/zeroshot_acc.csv
