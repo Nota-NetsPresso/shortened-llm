@@ -61,7 +61,10 @@ def get_model(
     tokenizer = base_model if tokenizer is None else tokenizer
     if model_type == "pretrain":
         config = AutoConfig.from_pretrained(base_model)
-        if "LlamaForCausalLM" in config.__getattribute__("architectures"):
+        if (
+            "LlamaForCausalLM" in config.__getattribute__("architectures")
+            and "llama-3" not in base_model.lower()
+        ):
             model = LlamaForCausalLM.from_pretrained(base_model, low_cpu_mem_usage=True)
             tokenizer = LlamaTokenizer.from_pretrained(tokenizer)
         else:

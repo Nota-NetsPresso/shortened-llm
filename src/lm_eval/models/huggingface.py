@@ -361,7 +361,7 @@ class HuggingFaceAutoLM(BaseLM):
         
         from transformers import AutoConfig
         config = AutoConfig.from_pretrained(pretrained)
-        if "LlamaForCausalLM" in config.__getattribute__("architectures"): 
+        if "LlamaForCausalLM" in config.__getattribute__("architectures") and "llama-3" not in pretrained.lower(): 
             from transformers import LlamaTokenizer
             tokenizer = LlamaTokenizer.from_pretrained(pretrained)
         else:
