@@ -1,0 +1,21 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 11
+<|begin_of_text|>The Leaning Tower of Pisa is known for its tilt. It is built on sandy soil which causes the tower to sink and tilt. The tower was completed in 1348 and was almost a hundred feet taller than its current height.
+The Leaning Tower of Pisa is known for its tilt. It is built on sandy soil which causes the tower to sink and tilt. The tower was completed in 1348 and was almost a hundred feet taller than its current height. The tower has become one of the most recognizable structures in the world, with a number of architectural styles being incorporated into its design.
+The tower was built by Giovanni Bicci da Pisa to honour the Madonna
+=== output 1 | leng gen 128 + input 11
+<|begin_of_text|>The Leaning Tower of Pisa is known for its distinctive tilt. The 12th-century building began to sink during construction, as the softer foundation soil underneath the southwest side could not support its weight. This caused the tower to tilt, moving at 1 millimetre each year. In 1990, a team of scientists began stabilising the tower and the 56-degree lean was reduced.
+Now, an international team of scientists from around the world have discovered two unknown species of the tree that inspired the world-famous tower of Pisa, a new species of tree in the same genus, and two new varieties of the leaning monument’s closest living relative.
+In a paper published
+=== output 2 | leng gen 128 + input 11
+<|begin_of_text|>The Leaning Tower of Pisa is known for its extreme slant and for the difficulties it has posed to those who would put it up straight. It is so famous as a leaning tower, however, that many people are not aware that it began as just another tower to mark one corner of the cemetery for the baptistery, cathedral, and hospital of the Pisa Cathedral Square. This was a popular architectural feature at the time, the only difference being that most of these towers were built perpendicular to the ground, as per instructions from the bible. However, this is only one of the things that make this tower so famous today. It stands out in several ways and is an absolutely
+=== output 3 | leng gen 128 + input 11
+<|begin_of_text|>The Leaning Tower of Pisa is known for its unique design and for its leaning construction. But did you know that you can actually walk all the way up the tower? There is a series of 294 steps that you can climb up to the top. And you will definitely want to do that, not only for the beautiful view of the city, but also to fully appreciate the structure of the tower.
+The Torre Pendente di Pisa, or the Leaning Tower of Pisa, was designed by the architect Giovanni di Simone in 1174 as a freestanding bell tower for the Duomo of Pisa and the Pisa Cathedral. However, the tower was actually
+=== output 4 | leng gen 128 + input 11
+<|begin_of_text|>The Leaning Tower of Pisa is known for its tilt, but there’s much more to its story
+From the moment the Leaning Tower of Pisa opened its doors in the 12th century, it began to lean to one side.
+Some 800 years later, and the tower is still tilting and leaning, a feat of architectural engineering that draws visitors and tourists from all over the world.
+But the story behind this tower is a far more complex and layered history than the mere “tilting” that is the most well known.
+In fact, while Pisa is known as the home of the Leaning Tower of Pisa, the leaning tower of Milan – built in
