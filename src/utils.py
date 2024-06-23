@@ -31,7 +31,7 @@ def count_params(model):
     return sum(p.numel() for p in model.parameters())
 
 
-def set_model_device_evalmode(model, device, fix_decapoda_config=True):
+def set_model_device_evalmode(model, device, fix_decapoda_config=False):
     if "cuda" in device:
         model.half()
         model = model.to(device)
@@ -56,7 +56,7 @@ def get_model(
     tokenizer=None,
     model_type="pretrain",
     device="cuda",
-    fix_decapoda_config=True,
+    fix_decapoda_config=False,
 ):
     tokenizer = base_model if tokenizer is None else tokenizer
     if model_type == "pretrain":
@@ -132,7 +132,7 @@ def get_block_pruned_network(
     unimportance_order,
     num_pruned_blocks=1,
     device="cuda",
-    fix_decapoda_config=True,
+    fix_decapoda_config=False,
 ):
     # Define the block-pruned architecture with random initialization
     config = copy.deepcopy(model_orig.config)

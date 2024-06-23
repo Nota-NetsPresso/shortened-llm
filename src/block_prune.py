@@ -82,6 +82,7 @@ if __name__ == "__main__":
         unimportance_order=unimportance_order,
         num_pruned_blocks=args.num_pruned_blocks,
         device=args.device,
+        fix_decapoda_config=args.fix_decapoda_config,
     )
 
     # Save
