@@ -47,6 +47,7 @@ if __name__ == "__main__":
         action="store_true",
         help="whether to add BOS token to every sample in calibration dataset",
     )
+    parser.add_argument("--use_bfloat", default=False, action="store_true")
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -65,6 +66,7 @@ if __name__ == "__main__":
             model_type=args.model_type,
             device="cpu",
             fix_decapoda_config=args.fix_decapoda_config,
+            use_bfloat=args.use_bfloat,
         )
         loss_fct = torch.nn.CrossEntropyLoss(reduction="none")
 

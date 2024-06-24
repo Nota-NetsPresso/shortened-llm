@@ -100,6 +100,7 @@ if __name__ == "__main__":
         action="store_true",
         help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf",
     )
+    parser.add_argument("--use_bfloat", default=False, action="store_true")
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -111,6 +112,7 @@ if __name__ == "__main__":
         model_type=args.model_type,
         device=args.device,
         fix_decapoda_config=args.fix_decapoda_config,
+        use_bfloat=args.use_bfloat,
     )
 
     # Prepare input for batched generation

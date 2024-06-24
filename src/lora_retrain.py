@@ -31,6 +31,7 @@ def main(args):
         model_type=args.model_type,
         device=args.device,
         fix_decapoda_config=args.fix_decapoda_config,
+        use_bfloat=args.use_bfloat,
     )
 
     gradient_accumulation_steps = args.batch_size // args.micro_batch_size
@@ -145,6 +146,13 @@ def main(args):
                 )
             val_data[extra_dataset] = test_data
 
+    fp16_flag = True
+    bf16_flag = False
+    if args.use_bfloat:
+        model = model.bfloat16()
+        fp16_flag = False
+        bf16_flag = True
+
     trainer = transformers.Trainer(
         model=model,
         train_dataset=train_data,
@@ -155,7 +163,8 @@ def main(args):
             warmup_steps=100,
             num_train_epochs=args.num_epochs,
             learning_rate=args.learning_rate,
-            fp16=True,
+            fp16=fp16_flag,
+            bf16=bf16_flag,
             logging_steps=10,
             logging_first_step=True,
             optim="adamw_torch",
@@ -199,6 +208,7 @@ def main(args):
             tokenizer=args.tokenizer,
             model_type=args.model_type,
             device=args.device,
+            use_bfloat=args.use_bfloat,
         )
 
         from LLMPruner.peft import PeftModel
@@ -252,6 +262,7 @@ if __name__ == "__main__":
         action="store_true",
         help="fix tokenizer config of baffo32/decapoda-research-llama-7B-hf",
     )
+    parser.add_argument("--use_bfloat", default=False, action="store_true")
 
     parser.add_argument(
         "--data_path", type=str, default="yahma/alpaca-cleaned", help="data path"

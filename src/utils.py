@@ -31,7 +31,9 @@ def count_params(model):
     return sum(p.numel() for p in model.parameters())
 
 
-def set_model_device_evalmode(model, device, fix_decapoda_config=False):
+def set_model_device_evalmode(
+    model, device, fix_decapoda_config=False, use_bfloat=False
+):
     if "cuda" in device:
         model.half()
         model = model.to(device)
@@ -42,6 +44,9 @@ def set_model_device_evalmode(model, device, fix_decapoda_config=False):
         model.config.bos_token_id = 1
         model.config.eos_token_id = 2
     model.eval()
+
+    if use_bfloat:
+        model = model.bfloat16()
 
     gc.collect()
     torch.cuda.empty_cache()
@@ -57,6 +62,7 @@ def get_model(
     model_type="pretrain",
     device="cuda",
     fix_decapoda_config=False,
+    use_bfloat=False,
 ):
     tokenizer = base_model if tokenizer is None else tokenizer
     if model_type == "pretrain":
@@ -89,7 +95,7 @@ def get_model(
     if fix_decapoda_config:
         # unwind broken decapoda-research config
         tokenizer.pad_token_id = 0
-    model = set_model_device_evalmode(model, device, fix_decapoda_config)
+    model = set_model_device_evalmode(model, device, fix_decapoda_config, use_bfloat)
 
     return model, tokenizer, description
 
@@ -133,6 +139,7 @@ def get_block_pruned_network(
     num_pruned_blocks=1,
     device="cuda",
     fix_decapoda_config=False,
+    use_bfloat=False,
 ):
     # Define the block-pruned architecture with random initialization
     config = copy.deepcopy(model_orig.config)
@@ -147,7 +154,9 @@ def get_block_pruned_network(
     model_pruned = copy_weight(
         model_pruned, model_orig, unimportance_order[:num_pruned_blocks]
     )
-    model_pruned = set_model_device_evalmode(model_pruned, device, fix_decapoda_config)
+    model_pruned = set_model_device_evalmode(
+        model_pruned, device, fix_decapoda_config, use_bfloat
+    )
     return model_pruned
 
 
