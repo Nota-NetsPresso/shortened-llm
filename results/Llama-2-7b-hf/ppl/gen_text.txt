@@ -1,0 +1,25 @@
+=== input ===
+The Leaning Tower of Pisa is known for
+=== output 0 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for having tilted over the years, but it isn’t the only place in the world where this happens.
+The world has hundreds of naturally-forming leaning towers. Many of the ones listed below are made of rock, while the others are made out of wood.
+There are many people who want to visit the Leaning Tower of Pisa. It is one of the most recognized structures in the world.
+However, if you are planning to go to Italy, you will probably have to wait until after 2021. There is an ongoing project that will see the tower be closed for
+=== output 1 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its tilt. The reason it leans is due to the soft soil on which it was built. It has been undergoing restoration since 2001. Photo: Kyle Taylor
+If you're headed to Pisa, it's worth checking out the Leaning Tower of Pisa. The tower's tilt has earned it quite the reputation.
+According to History.com, the 177-foot-tall tower was constructed between 1173 and 1396, but by the 1300s it was leaning significantly
+=== output 2 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its precarious tilt. But why exactly is it leaning? And, more importantly, what's being done to stop it?
+One of the most famous tourist attractions in Italy, the Leaning Tower of Pisa is officially known as the Torre Pendente di Pisa or the Campanile di Pisa. It's the bell tower for the Pisa Cathedral, and it leans because the foundation is on soft, unstable clay.
+The 190-foot tower has been leaning for more than 800 years. The structure's base
+=== output 3 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for being...lean. The famous tower's unlevelled base has been the subject of many theories as to its formation. This informative title explains that the base is sinking into soft ground. The book uses a 3-dimensional diagram to illustrate how the ground shifts in response to rainwater and the way the tower leans when it is filled with water.
+Lifting Levers
+In this hands-on activity, children learn what a lever is and how it works. They practice balancing with...
+How to Make a Lever
+In this interactive activity, learners find out what a lever is and see
+=== output 4 | leng gen 128 + input 12
+<s> The Leaning Tower of Pisa is known for its precarious angle, but how was it even built?
+The Leaning Tower of Pisa is one of the most recognisable buildings in the world, as well as one of Italy’s most iconic cultural symbols. But it’s also the subject of one of its most persistent urban myths.
+The tower is famously leaning to one side, an angle that’s been slowly increasing since it was first built. While historians dispute the exact reason it’s leaning, it does raise the question of how this building, famous for its unsteadiness, was ever finished in the
