@@ -1,5 +1,5 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=3
 
 run_command () {
     python src/eval_ppl.py --base_model $1 --output_dir results/$2/ppl $3
@@ -27,3 +27,4 @@ run_command "rishiraj/CatPPT-base" "CatPPT-base" ""
 run_command "google/gemma-2b" "gemma-2b" ""
 run_command "google/gemma-7b" "gemma-7b" ""
 run_command "meta-llama/Meta-Llama-3-8B" "Meta-Llama-3-8B" ""
+run_command "meta-llama/Llama-2-7b-hf" "Llama-2-7b-hf" "--use_bfloat"
