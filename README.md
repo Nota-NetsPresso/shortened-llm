@@ -1,5 +1,14 @@
 # Shortened LLM by Nota AI
-Official codebase for [**Shortened LLaMA: A Simple Depth Pruning for Large Language Models**](https://openreview.net/forum?id=18VGxuOdpu) [[ArXiv](https://arxiv.org/abs/2402.02834)] [[ICLR 2024 Workshop on ME-FoMo](https://sites.google.com/view/me-fomo2024)].
+Official codebase for [**Shortened LLaMA: Depth Pruning for Large Language Models with Comparison of Retraining Methods**](https://arxiv.org/abs/2402.02834) [[ArXiv](https://arxiv.org/abs/2402.02834)] [[ICLR 2024 Workshop on ME-FoMo](https://sites.google.com/view/me-fomo2024)][[Blog Post](https://www.nota.ai/community/shortened-llm-a-simple-depth-pruning-for-large-language-models)].
+
+* We perform one-shot pruning by removing unimportant Transformer blocks in LLMs. Compared to recent baselines, our **depth pruning** achieves faster inference while yielding comparable or superior performance.
+* In retraining pruned models for quality recovery, **continued pretraining (CPT)** on a large corpus markedly outperforms LoRA-based tuning, particularly at severe pruning ratios.
+
+
+<p align="center">
+<img alt="teaser" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/teaser.png" width="60%">
+</p>
+
 
 ## Installation
   ```bash
@@ -21,6 +30,50 @@ Note on package versions:
 - Torch version used in our experiments: `2.0.1` for RTX3090 & A100; `2.1.1` for H100. 
 
 </details>
+
+
+## Models from Aggressive Pruning & CPT Retraining (arXiv-v2):
+  | Source<br>Model | Pruning<br>Ratio | Pruning<br>Criterion | 🤗Hugging Face<br>Link |
+  |:---:|:---:|:---:|:---:|
+  | Vicuna-v1.3-7B | 20% | PPL | [nota-ai/cpt_st-vicuna-v1.3-5.5b-ppl](https://huggingface.co/nota-ai/cpt_st-vicuna-v1.3-5.5b-ppl) |
+  | Vicuna-v1.3-7B | 45% | PPL | [nota-ai/cpt_st-vicuna-v1.3-3.7b-ppl](https://huggingface.co/nota-ai/cpt_st-vicuna-v1.3-3.7b-ppl) |
+  | Vicuna-v1.3-7B | 60% | PPL | [nota-ai/cpt_st-vicuna-v1.3-2.7b-ppl](https://huggingface.co/nota-ai/cpt_st-vicuna-v1.3-2.7b-ppl) |
+  | Vicuna-v1.3-7B | 80% | PPL | [nota-ai/cpt_st-vicuna-v1.3-1.5b-ppl](https://huggingface.co/nota-ai/cpt_st-vicuna-v1.3-1.5b-ppl) |
+
+<details>
+<summary>
+Click to see the results:
+</summary>
+
+- EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c)
+
+<img alt="results" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st_llm-cpt_results.png" width="100%">
+
+</details>
+
+
+## Models from Moderate Pruning & LoRA Retraining (arXiv-v1):
+  | Source<br>Model | Pruning<br>Ratio | Pruning<br>Criterion | 🤗Hugging Face<br>Link |
+  |:---:|:---:|:---:|:---:|
+  | LLaMA-1-7B | 20% | PPL | [nota-ai/st-llama-1-5.5b-ppl](https://huggingface.co/nota-ai/st-llama-1-5.5b-ppl) |
+  | LLaMA-1-7B | 20% | Taylor+ | [nota-ai/st-llama-1-5.5b-taylor](https://huggingface.co/nota-ai/st-llama-1-5.5b-taylor) |
+  | Vicuna-v1.3-7B | 20% | PPL | [nota-ai/st-vicuna-v1.3-5.5b-ppl](https://huggingface.co/nota-ai/st-vicuna-v1.3-5.5b-ppl) |
+  | Vicuna-v1.3-7B | 20% | Taylor+ | [nota-ai/st-vicuna-v1.3-5.5b-taylor](https://huggingface.co/nota-ai/st-vicuna-v1.3-5.5b-taylor) |
+  | Vicuna-v1.3-13B | 21% | PPL | [nota-ai/st-vicuna-v1.3-10.5b-ppl](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-ppl) |
+  | Vicuna-v1.3-13B | 21% | Taylor+ | [nota-ai/st-vicuna-v1.3-10.5b-taylor](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-taylor) |
+
+<details>
+
+<summary>
+Click to see the results:
+</summary>
+
+- EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c)
+
+<img alt="results" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_zero-shot_scores.png" width="100%">
+
+</details>
+
 
 ## Examples
 The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero-shot evaluation.
@@ -66,39 +119,6 @@ The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero
   bash script/prune_gemma-7b_crit-taylor_yesBOS.sh
   ```
 
-## Model Description
-After identifying unimportant Transformer blocks, we perform one-shot pruning and light LoRA-based retraining.
-    <details>
-    <summary>
-    Click to see a method figure:
-    </summary>
-    <img alt="method" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_method.png" width="100%">
-    </details>
-
-#### Model Links
-- Available at 🤗Hugging Face Models:
-
-  | Source<br>Model | Pruning<br>Ratio | Pruning<br>Criterion | HF Models<br>Link |
-  |:---:|:---:|:---:|:---:|
-  | LLaMA-1-7B | 20% | PPL | [nota-ai/st-llama-1-5.5b-ppl](https://huggingface.co/nota-ai/st-llama-1-5.5b-ppl) |
-  | LLaMA-1-7B | 20% | Taylor+ | [nota-ai/st-llama-1-5.5b-taylor](https://huggingface.co/nota-ai/st-llama-1-5.5b-taylor) |
-  | Vicuna-v1.3-7B | 20% | PPL | [nota-ai/st-vicuna-v1.3-5.5b-ppl](https://huggingface.co/nota-ai/st-vicuna-v1.3-5.5b-ppl) |
-  | Vicuna-v1.3-7B | 20% | Taylor+ | [nota-ai/st-vicuna-v1.3-5.5b-taylor](https://huggingface.co/nota-ai/st-vicuna-v1.3-5.5b-taylor) |
-  | Vicuna-v1.3-13B | 21% | PPL | [nota-ai/st-vicuna-v1.3-10.5b-ppl](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-ppl) |
-  | Vicuna-v1.3-13B | 21% | Taylor+ | [nota-ai/st-vicuna-v1.3-10.5b-taylor](https://huggingface.co/nota-ai/st-vicuna-v1.3-10.5b-taylor) |
-
-#### Zero-shot Evaluation
-- To measure (1) PPL on WikiText2 & PTB, and (2) accuracy on seven commonsense reasoning tasks, use: (EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c))
-    ```bash
-    bash script/evaluate.sh
-    ```
-
-    <details>
-    <summary>
-    Click to see the zero-shot results:
-    </summary>
-  <img alt="results" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_zero-shot_scores.png" width="100%">
-    </details>
 
 ## Other Scripts
 - To test other pruning ratios, use:
@@ -111,6 +131,11 @@ After identifying unimportant Transformer blocks, we perform one-shot pruning an
   bash script/prune_llama-7b_crit-magnitude.sh
   bash script/prune_vicuna-7b_crit-magnitude.sh
   bash script/prune_vicuna-13b_crit-magnitude.sh
+  ```
+
+- To measure (1) PPL on WikiText2 & PTB, and (2) accuracy on seven commonsense reasoning tasks, use: (EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c))
+  ```bash
+  bash script/evaluate.sh
   ```
 
 - To measure latency & throughput, use:
@@ -141,6 +166,7 @@ Click to see a demo screenshot (on an A100 80GB GPU):
 <img alt="demo" img src="https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/st-llama_demo_screenshot.png" width="100%">
 </details>
 
+
 ## License
 - All rights related to this repository and the compressed models are reserved by Nota Inc.
 - The intended use is strictly limited to research and non-commercial projects.
@@ -148,12 +174,12 @@ Click to see a demo screenshot (on an A100 80GB GPU):
 ## Acknowledgments
 - [Microsoft for Startups Founders Hub](https://www.microsoft.com/en-us/startups) and [Gwangju AICA](http://www.aica-gj.kr/main.php) for generously providing GPU resources.
 - [LLM-Pruner](https://github.com/horseee/LLM-Pruner), which utilizes [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness), [PEFT](https://github.com/huggingface/peft), and [Alpaca-LoRA](https://github.com/tloen/alpaca-lora). Thanks for the pioneering work on structured pruning of LLMs! 
-- Meta AI's [LLaMA](https://github.com/facebookresearch/llama) and  LMSYS Org's [Vicuna](https://github.com/lm-sys/FastChat/blob/main/docs/vicuna_weights_version.md). Thanks for the open-source LLMs!
+- [LLaMA](https://github.com/facebookresearch/llama), [Vicuna](https://github.com/lm-sys/FastChat/blob/main/docs/vicuna_weights_version.md), and [SlimPajama](https://huggingface.co/datasets/cerebras/SlimPajama-627B). Thanks for the open-source LLMs and data!
 
 ## Citation
 ```bibtex
 @article{kim2024shortened,
-  title={Shortened LLaMA: A Simple Depth Pruning for Large Language Models},
+  title={Shortened LLaMA: Depth Pruning for Large Language Models with Comparison of Retraining Methods},
   author={Kim, Bo-Kyeong and Kim, Geonmin and Kim, Tae-Ho and Castells, Thibault and Choi, Shinkook and Shin, Junho and Song, Hyoung-Kyu},
   journal={arXiv preprint arXiv:2402.02834},      
   year={2024},
