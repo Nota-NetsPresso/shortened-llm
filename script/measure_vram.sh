@@ -1,7 +1,7 @@
 #!/bin/bash
 export CUDA_VISIBLE_DEVICES=0
 
-run_command () {    
+run_command() {
     for batch_size in {1,16,8,32,64,128,256}; do
         for max_seq_len in {128,512}; do
             python src/gen_batch_eval_vram.py --base_model $1 \
@@ -11,8 +11,11 @@ run_command () {
     done
 }
 
-run_command "baffo32/decapoda-research-llama-7B-hf" "llama-1-7b" "--fix_decapoda_config"
-run_command "nota-ai/st-llama-1-5.5b-ppl" "st-llama-1-5.5b-ppl" "--fix_decapoda_config"
+#run_command "baffo32/decapoda-research-llama-7B-hf" "llama-1-7b" "--fix_decapoda_config"
+#run_command "nota-ai/st-llama-1-5.5b-ppl" "st-llama-1-5.5b-ppl" "--fix_decapoda_config"
 
-run_command "lmsys/vicuna-13b-v1.3" "vicuna-13b-v1.3" ""
-run_command "nota-ai/st-vicuna-v1.3-10.5b-ppl" "st-vicuna-v1.3-10.5b-ppl" ""
+#run_command "lmsys/vicuna-13b-v1.3" "vicuna-13b-v1.3" ""
+#run_command "nota-ai/st-vicuna-v1.3-10.5b-ppl" "st-vicuna-v1.3-10.5b-ppl" ""
+
+TOKENIZER="nota-ai/only-prune_st-vicuna-v1.3-3.7b-ppl"
+run_command "quantized_models/GPTQ/st-vicuna-v1.3-3.7b-ppl-CPT-iter-2208000" "st-vicuna-v1.3-3.7b-ppl-CPT-iter-2208000-GPTQ" "--tokenizer $TOKENIZER"
