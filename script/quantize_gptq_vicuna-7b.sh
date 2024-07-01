@@ -11,19 +11,20 @@ evaluate() {
 }
 
 BASE_MODEL_PATHS=(
-    "nota-ai/only-prune_st-vicuna-v1.3-2.7b-ppl" # st-vcn-2.7b-prunedinit
-    "/data/gmkim/checkpoints/only-prune_st-vicuna-v1.3-3.7b-ppl/hf/iter-2208000"
+    "nota-ai/cpt_st-vicuna-v1.3-3.7b-ppl"
+    "nota-ai/only-prune_st-vicuna-v1.3-2.7b-ppl"
 
 )
 
 QUANTIZED_MODEL_DIRS=(
-    "quantized_models/GPTQ/st-vcn-2.7b-prunedinit" # st-vcn-2.7b-prunedinit
-    "quantized_models/GPTQ/st-vicuna-v1.3-3.7b-ppl-CPT-iter-2208000"
+    "quantized_models/GPTQ/st-vcn-3.7b-CPT"
+    "quantized_models/GPTQ/st-vcn-2.7b-prunedinit"
+
 )
 
 EVAL_NAMES=(
-    "st-vcn-2.7b-prunedinit-GPTQ"
     "st-vcn-3.7b-CPT-GPTQ"
+    "st-vcn-2.7b-prunedinit-GPTQ"
 )
 
 NUM_EVAL=${#BASE_MODEL_PATHS[@]}

@@ -24,12 +24,33 @@ Official codebase for [**Shortened LLaMA: Depth Pruning for Large Language Model
 Note on package versions:
 </summary>
 
+
 - Part of the below repositories is included for evaluation:
   - `src/LLMPruner`: horseee/LLM-Pruner version [213ffa4](https://github.com/horseee/LLM-Pruner/tree/213ffa4d02f92f16d29219a97fd01a8622db1550)
   - `src/lm_eval`: EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c)
 - Torch version used in our experiments: `2.0.1` for RTX3090 & A100; `2.1.1` for H100. 
 
 </details>
+
+<details>
+<summary>
+(optional) GPTQ Support:
+</summary>
+
+
+- Post-training quantization can be further applied to our pruned model. 
+- We applied GPTQ on the pruned & re-trained models.
+  - repo: [AutoGPTQ](https://github.com/AutoGPTQ/AutoGPTQ/tree/v0.7.1) version `0.7.1`
+- To install the required packages, we recommend installation from source as follows:
+  ```bash
+  git clone https://github.com/AutoGPTQ/AutoGPTQ.git
+  cd AutoGPTQ
+  git checkout v0.7.1
+  pip install -vvv -e .
+  ```
+
+</details>
+
 
 
 ## Models from Aggressive Pruning & CPT Retraining (arXiv-v2):
@@ -136,6 +157,11 @@ The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero
 - To measure (1) PPL on WikiText2 & PTB, and (2) accuracy on seven commonsense reasoning tasks, use: (EleutherAI/lm-evaluation-harness version [3326c54](https://github.com/EleutherAI/lm-evaluation-harness/tree/3326c547a733d598b4377e54be96e194861b964c))
   ```bash
   bash script/evaluate.sh
+  ```
+
+- (Optional) Any post-training quantization method can be applied on our pruned models. Following example script quantize pruned vicuna-7b model with GPTQ and measuring ppl & accuracy (same as `script/evaluate.sh`):
+  ```bash
+  bash script/quantize_gptq_vicuna-7b.sh
   ```
 
 - To measure latency & throughput, use:
