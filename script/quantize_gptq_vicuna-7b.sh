@@ -11,20 +11,25 @@ evaluate() {
 }
 
 BASE_MODEL_PATHS=(
+    "nota-ai/cpt_st-vicuna-v1.3-5.5b-ppl"
     "nota-ai/cpt_st-vicuna-v1.3-3.7b-ppl"
-    "nota-ai/only-prune_st-vicuna-v1.3-2.7b-ppl"
+    "nota-ai/cpt_st-vicuna-v1.3-2.7b-ppl"
+    "nota-ai/cpt_st-vicuna-v1.3-1.5b-ppl"
 
 )
 
 QUANTIZED_MODEL_DIRS=(
+    "quantized_models/GPTQ/st-vcn-5.5b-CPT"
     "quantized_models/GPTQ/st-vcn-3.7b-CPT"
-    "quantized_models/GPTQ/st-vcn-2.7b-prunedinit"
-
+    "quantized_models/GPTQ/st-vcn-2.7b-CPT"
+    "quantized_models/GPTQ/st-vcn-1.5b-CPT"
 )
 
 EVAL_NAMES=(
+    "st-vcn-5.5b-CPT-GPTQ"
     "st-vcn-3.7b-CPT-GPTQ"
-    "st-vcn-2.7b-prunedinit-GPTQ"
+    "st-vcn-2.7b-CPT-GPTQ"
+    "st-vcn-1.5b-CPT-GPTQ"
 )
 
 NUM_EVAL=${#BASE_MODEL_PATHS[@]}
