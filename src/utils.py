@@ -76,7 +76,6 @@ def get_model(
                 trust_remote_code=True,
                 use_triton=False,
                 quantize_config=None,
-                # device=device,  # necessary to load AutoGPTQ model on cuda `device` without loading to cpu first
             )
             tokenizer = AutoTokenizer.from_pretrained(tokenizer)
         elif (
