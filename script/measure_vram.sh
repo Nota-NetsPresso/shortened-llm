@@ -11,11 +11,10 @@ run_command() {
     done
 }
 
-#run_command "baffo32/decapoda-research-llama-7B-hf" "llama-1-7b" "--fix_decapoda_config"
-#run_command "nota-ai/st-llama-1-5.5b-ppl" "st-llama-1-5.5b-ppl" "--fix_decapoda_config"
+run_command "baffo32/decapoda-research-llama-7B-hf" "llama-1-7b" "--fix_decapoda_config"
+run_command "nota-ai/st-llama-1-5.5b-ppl" "st-llama-1-5.5b-ppl" "--fix_decapoda_config"
 
-#run_command "lmsys/vicuna-13b-v1.3" "vicuna-13b-v1.3" ""
-#run_command "nota-ai/st-vicuna-v1.3-10.5b-ppl" "st-vicuna-v1.3-10.5b-ppl" ""
+run_command "lmsys/vicuna-13b-v1.3" "vicuna-13b-v1.3" ""
+run_command "nota-ai/st-vicuna-v1.3-10.5b-ppl" "st-vicuna-v1.3-10.5b-ppl" ""
 
-TOKENIZER="nota-ai/only-prune_st-vicuna-v1.3-3.7b-ppl"
-run_command "quantized_models/GPTQ/st-vicuna-v1.3-3.7b-ppl-CPT-iter-2208000" "st-vicuna-v1.3-3.7b-ppl-CPT-iter-2208000-GPTQ" "--tokenizer $TOKENIZER"
+run_command "quantized_models/GPTQ/st-vcn-5.5b-CPT" "st-vcn-5.5b-CPT-GPTQ" ""

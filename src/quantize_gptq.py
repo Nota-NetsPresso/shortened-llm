@@ -6,8 +6,10 @@ from transformers import AutoTokenizer
 import torch
 import numpy as np
 from datasets import load_dataset
-
 from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
+
+from utils import set_seed
+from dataset import get_examples
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
@@ -16,19 +18,19 @@ logging.basicConfig(
 )
 
 
-def get_dataset(
-    nsamples, seed, seqlen, tokenizer, load_dataset_kwargs, buffer_size=5000
-):
-
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    np.random.seed(seed)
-    random.seed(seed)
+def get_dataset(nsamples, seed, seqlen, tokenizer, buffer_size=5000):
+    # set random seed for reproducibility
+    set_seed(seed)
 
     # load raw dataset from Huggingface datasets
-    raw_data = load_dataset(**load_dataset_kwargs)
+    raw_data = get_examples(
+        dataset="c4",
+        tokenizer=tokenizer,
+        n_samples=nsamples,
+        return_raw_dataset=True,
+    )
 
+    # concaenate long enough text
     all_text = "\n\n".join(
         raw_data["text"][:buffer_size]
     )  # further reduce sample size (large enough to cover nsamples*seqlen tokens)
@@ -67,24 +69,12 @@ def quantize(base_model, tokenizer_name=None, quantized_model_dir=None):
     model = AutoGPTQForCausalLM.from_pretrained(base_model, quantize_config)
 
     # get calibration data
-    # NOTE: please provide proper option for loading only subset of large datasets
-    load_dataset_kwargs = {
-        "path": "allenai/c4",
-        "split": "train",
-        "data_files": {"train": "en/c4-train.00000-of-01024.json.gz"},
-    }
-
-    try:
-        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, use_fast=False)
-    except Exception:
-        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, use_fast=True)
-
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
     examples = get_dataset(
         nsamples=128,
         seed=0,
         seqlen=2048,
         tokenizer=tokenizer,
-        load_dataset_kwargs=load_dataset_kwargs,
     )
 
     # quantize model, the examples should be list of dict whose keys can only be "input_ids" and "attention_mask"

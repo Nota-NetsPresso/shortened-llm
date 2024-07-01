@@ -51,6 +51,5 @@ for ((i = 0; i < $NUM_EVAL; i++)); do
     python src/quantize_gptq.py --base_model $BASE_MODEL_PATH --quantized_model_dir $QUANTIZED_MODEL_DIR
 
     # Evaluate
-    evaluate $QUANTIZED_MODEL_DIR $EVAL_NAME "--tokenizer $BASE_MODEL_PATH" &
-
+    evaluate $QUANTIZED_MODEL_DIR $EVAL_NAME ""
 done

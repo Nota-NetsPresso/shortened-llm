@@ -159,7 +159,7 @@ The scripts perform (1) block pruning ➔ (2) LoRA-based retraining ➔ (3) zero
   bash script/evaluate.sh
   ```
 
-- (Optional) Any post-training quantization method can be applied on our pruned models. Following example script quantize pruned vicuna-7b model with GPTQ and measuring ppl & accuracy (same as `script/evaluate.sh`):
+- (Optional) Any post-training quantization method can be applied to our pruned models. The example script quantizes our pruned models using GPTQ and measures their performance with `script/evaluate.sh`:
   ```bash
   bash script/quantize_gptq_vicuna-7b.sh
   ```
