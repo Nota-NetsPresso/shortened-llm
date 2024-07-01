@@ -86,11 +86,11 @@ def get_examples(
     seq_len=128,
     field_name="text",
     add_bos_to_every=False,
+    return_raw_dataset=False,
 ):
     if dataset == "c4":
         traindata = load_dataset(
             "allenai/c4",
-            "allenai--c4",
             data_files={"train": "en/c4-train.00000-of-01024.json.gz"},
             split="train",
         )
@@ -98,6 +98,9 @@ def get_examples(
         traindata = load_dataset("bookcorpus", split="train")
     else:
         raise NotImplementedError
+
+    if return_raw_dataset:
+        return traindata
 
     tokenized_samples, history = [], []
 

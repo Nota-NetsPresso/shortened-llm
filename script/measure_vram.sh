@@ -1,7 +1,7 @@
 #!/bin/bash
 export CUDA_VISIBLE_DEVICES=0
 
-run_command () {    
+run_command() {
     for batch_size in {1,16,8,32,64,128,256}; do
         for max_seq_len in {128,512}; do
             python src/gen_batch_eval_vram.py --base_model $1 \
@@ -16,3 +16,5 @@ run_command "nota-ai/st-llama-1-5.5b-ppl" "st-llama-1-5.5b-ppl" "--fix_decapoda_
 
 run_command "lmsys/vicuna-13b-v1.3" "vicuna-13b-v1.3" ""
 run_command "nota-ai/st-vicuna-v1.3-10.5b-ppl" "st-vicuna-v1.3-10.5b-ppl" ""
+
+run_command "quantized_models/GPTQ/st-vcn-5.5b-CPT" "st-vcn-5.5b-CPT-GPTQ" ""
