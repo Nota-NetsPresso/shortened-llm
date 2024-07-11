@@ -67,7 +67,18 @@ def get_model(
     tokenizer = base_model if tokenizer is None else tokenizer
     if model_type == "pretrain":
         config = AutoConfig.from_pretrained(base_model)
-        if (
+        if "gptq" in base_model.lower():
+            from auto_gptq import AutoGPTQForCausalLM
+
+            model = AutoGPTQForCausalLM.from_quantized(
+                base_model,
+                use_safetensors=True,
+                trust_remote_code=True,
+                use_triton=False,
+                quantize_config=None,
+            )
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer)
+        elif (
             "LlamaForCausalLM" in config.__getattribute__("architectures")
             and "llama-3" not in base_model.lower()
         ):

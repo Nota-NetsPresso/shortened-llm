@@ -290,7 +290,7 @@ class HuggingFaceAutoLM(BaseLM):
         bnb_4bit_use_double_quant: Optional[bool] = False,
     ) -> transformers.AutoModel:
         """Returns a pre-trained pytorch model from a pre-trained model configuration."""
-        if not quantized:
+        if 'GPTQ' not in pretrained and not quantized:
             if load_in_4bit:
                 assert transformers.__version__ >= "4.30.0", "load_in_4bit requires transformers >= 4.30.0"
             model_kwargs = {}
@@ -319,15 +319,13 @@ class HuggingFaceAutoLM(BaseLM):
             from auto_gptq import AutoGPTQForCausalLM
             model = AutoGPTQForCausalLM.from_quantized(
                 pretrained,
-                model_basename=None if quantized == True else Path(quantized).stem,
-                device_map=device_map,
+                device="cuda:0",
                 max_memory=max_memory,
-                trust_remote_code=trust_remote_code,
-                use_safetensors=True if quantized == True else quantized.endswith('.safetensors'),
-                use_triton=gptq_use_triton,
-                warmup_triton=gptq_use_triton,
-                inject_fused_attention=inject_fused_attention,
+                trust_remote_code=True,
+                use_safetensors=True,
+                use_triton=False,
             )
+            
         return model
 
     def _create_auto_model_peft(
