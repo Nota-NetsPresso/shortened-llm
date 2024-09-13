@@ -2,14 +2,12 @@ import argparse
 import logging
 import random
 
-from transformers import AutoTokenizer
 import torch
-import numpy as np
-from datasets import load_dataset
 from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
-
-from utils import set_seed
 from dataset import get_examples
+from transformers import AutoTokenizer
+from utils import set_seed
+
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s [%(name)s] %(message)s",

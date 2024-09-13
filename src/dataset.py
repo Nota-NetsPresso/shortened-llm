@@ -5,11 +5,20 @@ https://github.com/horseee/LLM-Pruner/blob/main/LLMPruner/datasets/example_sampl
 https://github.com/horseee/LLM-Pruner/blob/main/LLMPruner/datasets/ppl_dataset.py
 """
 
+import os
 import random
+import subprocess
 
 import torch
 from datasets import load_dataset
 from torch.utils.data.dataset import Dataset
+
+
+C4_OUTPUT_DIR = "tmp/data/c4/en"
+C4_S3_URL = "https://netspresso-research-code-release.s3.us-east-2.amazonaws.com/compressed-llm/data/c4/en"
+C4_FILE_NAME = "c4-train.00000-of-01024.subset-n256-len3072.json"  # 6MB, nSamples=256 with SeqLen > 3072
+# C4_FILE_NAME = "c4-train.00000-of-01024.subset-n512-len4096.json" # 14MB, use this if more longer samples are needed.
+# C4_FILE_NAME = "c4-train.00000-of-01024.json" # 784MB, original split.
 
 
 class IndexDataset(Dataset):
@@ -89,11 +98,21 @@ def get_examples(
     return_raw_dataset=False,
 ):
     if dataset == "c4":
-        traindata = load_dataset(
-            "allenai/c4",
-            data_files={"train": "en/c4-train.00000-of-01024.json.gz"},
-            split="train",
-        )
+        # traindata = load_dataset(
+        #     "allenai/c4",
+        #     data_files={"train": "en/c4-train.00000-of-01024.json.gz"},
+        #     split="train",
+        # )
+        c4_data_file = f"{C4_OUTPUT_DIR}/{C4_FILE_NAME}"
+        if not os.path.exists(c4_data_file):
+            os.makedirs(C4_OUTPUT_DIR, exist_ok=True)
+            subprocess.call(
+                f"wget {C4_S3_URL}/{C4_FILE_NAME} -O {c4_data_file}", shell=True
+            )
+        else:
+            print(f"* Use pre-downloaded {c4_data_file}")
+        traindata = load_dataset("json", data_files={c4_data_file})
+        traindata = traindata["train"]
     elif dataset == "bookcorpus":
         traindata = load_dataset("bookcorpus", split="train")
     else:
